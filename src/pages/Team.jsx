@@ -4,6 +4,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import './Team.css';
 import PageLayout from '../components/PageLayout';
 import { TEAM } from '../data/bilder';
+import { mergeTeam } from '../data/team';
 
 function Team() {
   const [team, setTeam] = useState([]);
@@ -44,8 +45,8 @@ function Team() {
     };
   }, [selectedMember]);
 
-  // Team laut Live-Seite sofort zeigen; Contentful ersetzt es, sobald es Einträge liefert
-  const mitglieder = team.length && !error ? team : TEAM;
+  // Team laut Live-Seite sofort zeigen; Contentful-Einträge ersetzen gleichnamige Personen
+  const mitglieder = error ? TEAM : mergeTeam(team, TEAM);
 
   const openModal = (member) => {
     setSelectedMember(member);

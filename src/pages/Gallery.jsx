@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getGalleryImages } from '../services/contentful';
+import { getGalleryAlben } from '../services/contentful';
 import { ALBEN } from '../data/bilder';
 import './Gallery.css';
 import PageMeta from '../components/PageMeta';
 
-// Fotos der Live-Seite, solange Contentful leer oder nicht erreichbar ist
+// Fotos der Live-Seite als Alben; Contentful-Alben kommen davor dazu
 const LOKALE_BILDER = ALBEN.flatMap((album) =>
   album.bilder.map((b) => ({
     id: b.src,
@@ -16,16 +16,29 @@ const LOKALE_BILDER = ALBEN.flatMap((album) =>
   }))
 );
 
+// Contentful-Album → Kacheln; Bilder über die Images API verkleinert
+const ausCms = (alben) =>
+  alben.flatMap((album) =>
+    album.bilder.map((b, i) => ({
+      id: `${album.id}-${i}`,
+      src: `${b.src}?w=1600&fm=webp&q=76`,
+      thumb: `${b.src}?w=640&h=480&fit=fill&fm=webp&q=72`,
+      alt: b.alt,
+      title: '',
+      category: album.titel,
+    }))
+  );
+
 function Gallery() {
-  // Lokale Fotos sofort zeigen (kein Layout-Sprung); Contentful ersetzt sie, sobald es Bilder liefert
+  // Lokale Fotos sofort zeigen (kein Layout-Sprung); Contentful-Alben werden davor ergänzt
   const [images, setImages] = useState(LOKALE_BILDER);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const galleryImages = await getGalleryImages();
-        if (galleryImages.length) setImages(galleryImages);
+        const alben = await getGalleryAlben();
+        if (alben.length) setImages([...ausCms(alben), ...LOKALE_BILDER]);
       } catch {
         // CMS nicht erreichbar: lokale Fotos bleiben stehen
       }

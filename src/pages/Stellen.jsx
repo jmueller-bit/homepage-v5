@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import PageLayout from '../components/PageLayout';
 import { getStellenAngebote } from '../services/contentful';
 import { STELLE_MATHE } from '../data/inhalte';
@@ -18,17 +19,21 @@ const Liste = ({ titel, punkte }) =>
   ) : null;
 
 function Stelle({ job }) {
-  const mail = job.contactEmail || KONTAKT.email;
+  const mail = KONTAKT.email;
   return (
     <article className="stelle">
       <h2>{job.title}</h2>
       {job.type && <p className="weg-text">{job.type}</p>}
       {job.description && <p>{job.description}</p>}
+      {job.detailsRichText && <div className="stelle-text">{documentToReactComponents(job.detailsRichText)}</div>}
+      {job.attachment && (
+        <p>
+          <a href={job.attachment.url} target="_blank" rel="noopener noreferrer">{job.attachment.title}</a>
+        </p>
+      )}
       <Liste titel="Wir setzen voraus" punkte={job.voraussetzungen} />
-      {job.requirements && (<><h3>Anforderungen</h3><p>{job.requirements}</p></>)}
       <Liste titel="Wir wünschen uns" punkte={job.wuensche} />
       <Liste titel="Wir bieten" punkte={job.angebot} />
-      {job.benefits && (<><h3>Wir bieten</h3><p>{job.benefits}</p></>)}
       <a href={`mailto:${mail}?subject=${encodeURIComponent(`Bewerbung: ${job.title}`)}`} className="btn btn-primary">
         Per E-Mail bewerben
       </a>
@@ -40,9 +45,11 @@ function Stellen() {
   const [jobs, setJobs] = useState(null);
 
   useEffect(() => {
-    // CMS leer oder nicht erreichbar: die zuletzt veröffentlichte Anzeige zeigen statt „keine Stellen“
+    // Stellen aus Contentful; die Mathe-Anzeige der Live-Seite bleibt, bis sie dort selbst gepflegt ist
+    const mitMathe = (data) =>
+      data.some((j) => /mathematik/i.test(j.title || '')) ? data : [...data, STELLE_MATHE];
     getStellenAngebote()
-      .then((data) => setJobs(data.length ? data : [STELLE_MATHE]))
+      .then((data) => setJobs(mitMathe(data)))
       .catch(() => setJobs([STELLE_MATHE]));
   }, []);
 

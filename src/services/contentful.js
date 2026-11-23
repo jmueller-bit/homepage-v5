@@ -141,70 +141,55 @@ export const getTeamMembers = async (limit = 50) => {
   }
 }
 
-// Gallery Images
-export const getGalleryImages = async (limit = 50) => {
-  try {
-    const response = await client.getEntries({
-      content_type: 'galleryImage',
-      order: 'fields.reihenfolge',
-      limit,
-      include: 1
-    })
-    
-    return response.items.map(item => {
-      const fields = item.fields
-      const imageAsset = fields.bild?.[0] || fields.bild
-      const { width, height } = getImageDimensions(imageAsset)
-      
-      return {
-        id: item.sys.id,
-        title: fields.titel,
-        src: getImageUrl(imageAsset),
-        alt: fields.titel,
-        category: fields.kategorie || 'Allgemein',
-        description: fields.beschreibung || '',
-        order: fields.reihenfolge || 0,
-        width,
-        height
-      }
-    }).sort((a, b) => a.order - b.order)
-  } catch (error) {
-    console.error('Error fetching gallery images:', error)
-    return []
+// Galerie – Content-Types „galleryImage“ (schule-allgmein) und „schuleEvent“, je Eintrag ein Album
+const toAlbum = (item) => {
+  const { fields } = item
+  const assets = Array.isArray(fields.bild) ? fields.bild : fields.bild ? [fields.bild] : []
+  return {
+    id: item.sys.id,
+    titel: fields.titel,
+    kategorie: fields.kategorie || '',
+    order: fields.reihenfolge ?? 0,
+    bilder: assets
+      .map((asset) => ({
+        src: getImageUrl(asset),
+        alt: asset?.fields?.description || asset?.fields?.title || fields.titel,
+        ...getImageDimensions(asset)
+      }))
+      .filter((b) => b.src)
   }
 }
 
-// Stellenangebote (Job Listings)
+export const getGalleryAlben = async (limit = 50) => {
+  const responses = await Promise.all(
+    ['schuleEvent', 'galleryImage'].map((type) =>
+      client.getEntries({ content_type: type, order: 'fields.reihenfolge', limit, include: 1 })
+    )
+  )
+  return responses
+    .flatMap((r) => r.items.map(toAlbum))
+    .filter((a) => a.bilder.length)
+}
+
+// Stellen – Content-Type „stellen“ (Felder: position, beschreibungKurz, beschreibungLang, medien)
 export const getStellenAngebote = async (limit = 50) => {
-  try {
-    const response = await client.getEntries({
-      content_type: 'stellenangebot',
-      order: '-fields.erstelltAm',
-      limit,
-      include: 1
-    })
-    
-    return response.items.map(item => {
-      const fields = item.fields
-      
-      return {
-        id: item.sys.id,
-        title: fields.titel,
-        department: fields.abteilung || '',
-        type: fields.art || 'Vollzeit',
-        location: fields.standort || 'Wien',
-        description: richTextToPlainText(fields.beschreibung),
-        requirements: richTextToPlainText(fields.anforderungen),
-        benefits: richTextToPlainText(fields.benefits),
-        contactEmail: fields.kontaktEmail || 'office@astrid-lindgren-zentrum.at',
-        createdAt: fields.erstelltAm,
-        isActive: fields.aktiv !== false
-      }
-    }).filter(job => job.isActive)
-  } catch (error) {
-    console.error('Error fetching stellenangebote:', error)
-    return []
-  }
+  const response = await client.getEntries({
+    content_type: 'stellen',
+    order: '-sys.createdAt',
+    limit,
+    include: 1
+  })
+
+  return response.items.map((item) => {
+    const { fields } = item
+    return {
+      id: item.sys.id,
+      title: fields.position,
+      description: fields.beschreibungKurz || '',
+      detailsRichText: fields.beschreibungLang || null,
+      attachment: fields.medien ? { url: getImageUrl(fields.medien), title: fields.medien.fields?.title || 'Anhang' } : null
+    }
+  })
 }
 
 export default client
