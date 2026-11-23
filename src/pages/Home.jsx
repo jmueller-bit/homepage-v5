@@ -7,7 +7,8 @@ import './Home.css';
 import AufnahmeWeg from '../components/AufnahmeWeg';
 import Foto from '../components/Foto';
 import LogoListe from '../components/LogoListe';
-import { ALBEN, FAMILIENWORKSHOP } from '../data/bilder';
+import { ALBEN, FAMILIENWORKSHOP, BAND } from '../data/bilder';
+import BildBand from '../components/BildBand';
 import PageMeta from '../components/PageMeta';
 
 // Alle Inhalte: docs/analyse/inhalte/ (Live-Seite), nichts erfunden
@@ -57,6 +58,7 @@ function Home() {
   return (
     <div className="home">
       <PageMeta description="Reformpädagogische Schule mit Öffentlichkeitsrecht in Wien-Liesing: 1. bis 9. Schulstufe, max. 30 Schüler*innen, altersgemischte Gruppen, Nachmittagsbetreuung bis 16:30." />
+      <BildBand bilder={[BAND.lesen, BAND.bach, BAND.wiese, BAND.klasse]} className="bildband-start" />
       <section className="home-hero">
         <div className="container home-hero-grid">
           <div className="home-hero-text">

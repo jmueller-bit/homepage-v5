@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getGalleryAlben } from '../services/contentful';
-import { ALBEN } from '../data/bilder';
+import { ALBEN, BAND } from '../data/bilder';
+import BildBand from '../components/BildBand';
 import './Gallery.css';
 import PageMeta from '../components/PageMeta';
 
@@ -72,6 +73,7 @@ function Gallery() {
   return (
     <div className="gallery-page" data-farbe="ocker">
       <PageMeta title="Galerie" description="Bilder aus dem Schulalltag der Astrid Lindgren Schule." />
+      <BildBand bilder={[BAND.bach]} className="bildband-schmal" />
       <section className="gallery-hero">
         <div className="container">
           <h1>Galerie</h1>

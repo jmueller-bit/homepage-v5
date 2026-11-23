@@ -4,6 +4,8 @@ import NewsSkeleton from '../components/NewsSkeleton'
 import NewsError from '../components/NewsError'
 import './News.css'
 import PageMeta from '../components/PageMeta';
+import BildBand from '../components/BildBand';
+import { BAND } from '../data/bilder';
 
 function News() {
   const { articles, loading, error, pagination, loadMore, refresh } = useNewsArticles(9)
@@ -12,6 +14,7 @@ function News() {
   return (
     <div className="news-page" data-farbe="ocker">
       <PageMeta title="Aktuelles" description="Neuigkeiten aus der Astrid Lindgren Schule in Wien-Liesing." />
+      <BildBand bilder={[BAND.bach]} className="bildband-schmal" />
       <section className="news-hero">
         <div className="container">
           <h1>Aktuelles</h1>

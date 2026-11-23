@@ -1,8 +1,10 @@
 // Einzige Quelle für Header, Sitemap und Bereichsnavigation. Nur Seiten, die es gibt.
 // farbe: Logofarbe des Bereichs (gruen | ocker | rot), siehe DESIGN.md §4
+// band: Schwarz-Weiß-Kopfbild des Bereichs (Schlüssel in BAND, src/data/bilder.js)
 export const NAV = [
   {
     path: '/schule',
+    band: 'klasse',
     farbe: 'gruen',
     label: 'Unsere Schule',
     children: [
@@ -11,6 +13,7 @@ export const NAV = [
   },
   {
     path: '/eltern',
+    band: 'wiese',
     farbe: 'gruen',
     label: 'Für Eltern',
     children: [
@@ -22,6 +25,7 @@ export const NAV = [
   },
   {
     path: '/schulleben',
+    band: 'bach',
     farbe: 'ocker',
     label: 'Schulleben',
     children: [
@@ -32,6 +36,7 @@ export const NAV = [
   },
   {
     path: '/ueber-uns',
+    band: 'lesen',
     farbe: 'ocker',
     label: 'Über uns',
     children: [
@@ -44,6 +49,7 @@ export const NAV = [
   },
   {
     path: '/unterstuetzen',
+    band: 'wiese',
     farbe: 'rot',
     label: 'Unterstützen',
     children: [
@@ -52,6 +58,7 @@ export const NAV = [
   },
   {
     path: '/karriere',
+    band: 'klasse',
     farbe: 'rot',
     label: 'Karriere',
     children: [
@@ -59,7 +66,7 @@ export const NAV = [
       { path: '/karriere/stellen', label: 'Offene Stellen' },
     ],
   },
-  { path: '/kontakt', farbe: 'rot', label: 'Kontakt', children: [] },
+  { path: '/kontakt', band: 'bach', farbe: 'rot', label: 'Kontakt', children: [] },
 ];
 
 export const RECHTLICHES = [

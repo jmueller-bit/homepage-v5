@@ -12,6 +12,19 @@
     <meta property="og:locale" content="de_AT" />
     <meta property="og:site_name" content="Astrid Lindgren Zentrum" />
     <meta property="og:image" content="/images/opt/og-alz.jpg" />
+    <script>
+      // Erstes Bild des Startseiten-Bands früh laden (größtes Element im ersten Sichtbereich)
+      if (location.pathname === '/') {
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'image';
+        l.type = 'image/webp';
+        l.setAttribute('imagesrcset', '/images/alz/band/lesen-640.webp 640w, /images/alz/band/lesen-1240.webp 1240w');
+        l.setAttribute('imagesizes', '100vw');
+        l.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(l);
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

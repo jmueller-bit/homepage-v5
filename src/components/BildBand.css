@@ -1,0 +1,51 @@
+/* Seitenverhältnis der Originale 1240 × 386; mobil etwas höher, Ausschnitt links (dort sitzen die Logolinien) */
+.bildband {
+  position: relative;
+  aspect-ratio: 1240 / 386;
+  min-height: 150px;
+  max-height: 420px;
+  width: 100%;
+  overflow: hidden;
+  background: var(--paper-deep);
+}
+
+.bildband picture {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1200ms var(--ease);
+}
+
+.bildband picture.ist-aktiv {
+  opacity: 1;
+}
+
+.bildband img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left bottom;
+}
+
+/* Schmale Variante für Unterseiten: Ausschnitt weiter oben, damit Gesichter im Bild bleiben */
+.bildband-schmal {
+  max-height: 240px;
+}
+
+.bildband-schmal img {
+  object-position: center 30%;
+}
+
+/* Startseite mobil flacher: der Kennenlern-Termin bleibt im ersten Sichtbereich */
+@media (max-width: 767px) {
+  .bildband-start {
+    min-height: 0;
+    height: 120px;
+    aspect-ratio: auto;
+  }
+
+  .home-hero {
+    padding-top: 28px;
+  }
+}

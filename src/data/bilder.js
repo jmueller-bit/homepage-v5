@@ -251,3 +251,11 @@ export const TEAM = [
     foto: '/images/alz/team/christel-klein'
   }
 ];
+
+// Schwarz-Weiß-Kopfbilder der alten Startseite (Logolinien im Bild), 1240 × 386 px
+export const BAND = {
+  lesen: { src: '/images/alz/band/lesen', alt: 'Mädchen mit geschminktem Hundegesicht liest im Klassenraum' },
+  wiese: { src: '/images/alz/band/wiese', alt: 'Zwei Jugendliche helfen einem Jungen auf einer Wiese' },
+  bach: { src: '/images/alz/band/bach', alt: 'Kinder und Erwachsene erkunden einen Bach' },
+  klasse: { src: '/images/alz/band/klasse', alt: 'Klassenraum mit Regalen und Tafel' },
+};

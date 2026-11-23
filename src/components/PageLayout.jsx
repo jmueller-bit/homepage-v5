@@ -2,6 +2,8 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import PageMeta from './PageMeta';
 import { findSection } from '../data/navigation';
 import { KONTAKT } from '../data/kontakt';
+import BildBand from './BildBand';
+import { BAND } from '../data/bilder';
 import './PageLayout.css';
 
 // Gemeinsamer Rahmen der Unterseiten: Titel, Lead, Lesespalte, Bereichsnavigation
@@ -13,6 +15,7 @@ function PageLayout({ title, lead, description, metaTitle, aside = true, childre
   return (
     <div className="page" data-farbe={section?.farbe}>
       <PageMeta title={metaTitle ?? title} description={description} />
+      {section?.band && <BildBand bilder={[BAND[section.band]]} className="bildband-schmal" />}
       <header className="page-kopf">
         <div className="container">
           <h1>{title}</h1>

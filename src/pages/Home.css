@@ -1,7 +1,7 @@
 /* Startseite – Tokens aus DESIGN.md */
 
 .home-hero {
-  padding: 56px 0 48px;
+  padding: 40px 0 48px;
 }
 
 .home-hero-grid {
@@ -11,7 +11,7 @@
 }
 
 @media (min-width: 1024px) {
-  .home-hero { padding: 96px 0 72px; }
+  .home-hero { padding: 64px 0 72px; }
   .home-hero-grid { grid-template-columns: 1.6fr 1fr; gap: 72px; align-items: center; }
 }
 
