@@ -20,6 +20,7 @@ import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
 import Sitemap from './pages/Sitemap';
 import Footer from './components/Footer';
+import MobileActionBar from './components/MobileActionBar';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <MobileActionBar />
         <Analytics />
       </div>
     </Router>

@@ -1,169 +1,206 @@
 import { Link } from 'react-router-dom';
+import { getNaechsterTermin, formatTerminDatum } from '../data/termine';
+import { KONTAKT } from '../data/kontakt';
 import './Home.css';
+
+// Alle Inhalte: docs/analyse/inhalte/ (Live-Seite), nichts erfunden
+const FAKTEN = [
+  { wert: '1.–9.', text: 'Schulstufe, Pflichtschule' },
+  { wert: 'max. 30', text: 'Schüler*innen in der ganzen Schule' },
+  { wert: '8–12', text: 'Schüler*innen pro Pädagog*in' },
+  { wert: '16:30', text: 'Nachmittagsbetreuung bis' },
+];
+
+const PORTRAIT = [
+  'Statutenschule mit Öffentlichkeitsrecht',
+  'Kleine, altersgemischte Gruppen',
+  'Reformpädagogischer, ganzheitlicher Ansatz',
+  'Individuelles, selbstbestimmtes Lernen',
+  'Projektarbeit mit Realitätsbezug',
+  'Jause und Mittagessen, frisch in der Schule gekocht',
+];
+
+const AUFNAHME = [
+  { titel: 'Erstkontakt', text: 'Infoabend, Tag der offenen Tür, Anruf oder E-Mail' },
+  { titel: 'Persönliches Gespräch', text: 'mit Eltern und Kind' },
+  { titel: 'Hospitation der Eltern', text: 'einen Vormittag, 7:45–13:45' },
+  { titel: 'Hospitation des Kindes', text: 'eine ganze Woche, Mo–Fr 8–13:30' },
+  { titel: 'Abschlussgespräch', text: 'mit Schulleitung und Vorstand' },
+  { titel: 'Vertragsunterzeichnung', text: '' },
+];
+
+const GESUCHT = [
+  { titel: 'Lehrkraft für Mathematik/Naturwissenschaften', to: '/karriere/stellen' },
+  { titel: 'Zivildiener ab September 2027', to: '/karriere' },
+  { titel: 'Praktikant*innen', to: '/karriere' },
+];
+
+const NETZWERKE = [
+  'Verband der europäischen Astrid Lindgren Schulen',
+  'Schule der Zukunft (Gerald Hüther)',
+  'Klimabündnis Schule',
+  'Ökolog Schule',
+  'Wiener Netzwerk Gesundheitsfördernde Schulen',
+  'Netzwerk freier Schulen',
+];
+
+function TerminKarte() {
+  const termin = getNaechsterTermin();
+
+  if (!termin) {
+    return (
+      <aside className="termin" aria-labelledby="termin-titel">
+        <p className="termin-label">Kennenlernen</p>
+        <h2 id="termin-titel" className="termin-titel">Termin individuell vereinbaren</h2>
+        <p className="termin-meta">Rufen Sie uns an, wir finden gemeinsam einen Termin.</p>
+        <a href={KONTAKT.telHref} className="btn btn-primary">{KONTAKT.telefon}</a>
+      </aside>
+    );
+  }
+
+  return (
+    <aside className="termin" aria-labelledby="termin-titel">
+      <p className="termin-label">Nächster Kennenlern-Termin</p>
+      <h2 id="termin-titel" className="termin-titel">{termin.titel}</h2>
+      <p className="termin-datum">{formatTerminDatum(termin.datum)}</p>
+      <p className="termin-meta">
+        {[termin.zeit, termin.ort].filter(Boolean).join(' · ')}
+      </p>
+      <Link to="/kontakt" className="btn btn-primary">Teilnahme anfragen</Link>
+    </aside>
+  );
+}
 
 function Home() {
   return (
     <div className="home">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-bg">
-          <div className="hero-shape hero-shape-1"></div>
-          <div className="hero-shape hero-shape-2"></div>
-          <div className="hero-shape hero-shape-3"></div>
-        </div>
-        <div className="hero-content container">
-          <div className="hero-text glass fade-in">
-            <h1>Astrid Lindgren Schule</h1>
-            <p className="hero-subtitle">Zentrum für ganzheitliches Lernen</p>
-            <p className="hero-desc">
-              Eine reformpädagogische Schule mit Öffentlichkeitsrecht für Kinder von 6-15 Jahren. 
-              Wir begleiten jedes Kind auf seinem individuellen Bildungsweg.
+      <section className="home-hero">
+        <div className="container home-hero-grid">
+          <div className="home-hero-text">
+            <p className="home-kicker">Wien-Liesing · seit 2003</p>
+            <h1>
+              Astrid Lindgren Schule
+              <span className="home-hero-sub">Zentrum für ganzheitliches Lernen</span>
+            </h1>
+            <p className="home-lead">
+              Eine kleine Schule mit Öffentlichkeitsrecht von der 1. bis zur 9. Schulstufe.
+              Anmeldungen sind jederzeit möglich – besonders unsere Primaria I freut sich über Zuwachs.
             </p>
-            <div className="hero-buttons">
-              <Link to="/eltern/interessiert" className="btn btn-primary">
-                Kontakt aufnehmen
-              </Link>
-              <Link to="/schule" className="btn btn-outline">
-                Mehr erfahren
-              </Link>
+            <div className="home-hero-actions">
+              <a href={KONTAKT.telHref} className="btn btn-primary">Anrufen: {KONTAKT.telefon}</a>
+              <Link to="/eltern/anmeldung" className="btn btn-outline">So läuft die Aufnahme</Link>
             </div>
           </div>
-          <div className="hero-image floating">
-            <div className="hero-card glass">
-              <span className="hero-emoji">🌟</span>
-              <p>"Jedes Kind ist hoch begabt, wir müssen es nur erkennen."</p>
-              <cite>— Gerald Hüther, Neurobiologe</cite>
-            </div>
+          <TerminKarte />
+        </div>
+      </section>
+
+      <section className="home-fakten" aria-label="Die Schule in Zahlen">
+        <div className="container">
+          <dl className="fakten-liste">
+            {FAKTEN.map((f) => (
+              <div key={f.text} className="fakt">
+                <dt>{f.text}</dt>
+                <dd>{f.wert}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section className="section home-portrait">
+        <div className="container portrait-grid">
+          <figure className="portrait-bild">
+            <img
+              src="/images/gallery/ALZ_1410_06-scaled.jpg"
+              alt="Jahresbroschüre „HEJ! 2022/23“ des Astrid Lindgren Zentrums auf einem Holztisch"
+              width="2560"
+              height="1706"
+              loading="lazy"
+            />
+          </figure>
+          <div>
+            <h2 className="schwung">Wer wir sind</h2>
+            <ul className="portrait-liste">
+              {PORTRAIT.map((p) => <li key={p}>{p}</li>)}
+            </ul>
+            <blockquote className="zitat">
+              <p>„Jedes Kind ist hoch begabt, wir müssen es nur erkennen.“</p>
+              <cite>Gerald Hüther, Neurobiologe und Hirnforscher</cite>
+            </blockquote>
+            <Link to="/schule" className="pfeil-link">Mehr über die Schule</Link>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="stats-section">
+      <section className="section home-aufnahme">
         <div className="container">
-          <div className="stats-grid">
-            <div className="stat-card glass">
-              <span className="stat-number">1.-9.</span>
-              <span className="stat-label">Schulstufe</span>
-            </div>
-            <div className="stat-card glass">
-              <span className="stat-number">30</span>
-              <span className="stat-label">Max. Schüler</span>
-            </div>
-            <div className="stat-card glass">
-              <span className="stat-number">7:1</span>
-              <span className="stat-label">Betreuungsschlüssel</span>
-            </div>
-            <div className="stat-card glass">
-              <span className="stat-number">✓</span>
-              <span className="stat-label">Öffentlichkeitsrecht</span>
-            </div>
+          <h2 className="schwung">In sechs Schritten zu uns</h2>
+          <p className="abschnitt-lead">
+            Damit Sie und Ihr Kind unser Konzept gut kennenlernen, gibt es ein
+            Schritt-für-Schritt-Aufnahmeverfahren.
+          </p>
+          <ol className="aufnahme-weg">
+            {AUFNAHME.map((s) => (
+              <li key={s.titel}>
+                <h3>{s.titel}</h3>
+                {s.text && <p>{s.text}</p>}
+              </li>
+            ))}
+          </ol>
+          <div className="aufnahme-links">
+            <Link to="/eltern/anmeldung" className="btn btn-primary">Infos zur Anmeldung</Link>
+            <a href={KONTAKT.kostenPdf} className="pfeil-link" target="_blank" rel="noopener noreferrer">
+              Kosten &amp; Details 2026/27 (PDF)
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Current News */}
-      <section className="news-section section">
-        <div className="container">
-          <div className="section-header">
-            <h2 style={{ color: 'var(--red)' }}>Aktuelles</h2>
+      <section className="section home-stimmen">
+        <div className="container stimmen-grid">
+          <div>
+            <h2 className="schwung">Einblicke</h2>
+            <p>
+              Eltern, Lehrer*innen und die Gründerin erzählen in Video-Interviews vom Schulalltag,
+              von Demokratie, Noten und Freude am Lernen.
+            </p>
+            <Link to="/ueber-uns" className="pfeil-link">Zu den Video-Interviews</Link>
           </div>
-          <div className="news-grid">
-            <div className="news-card glass">
-              <span className="news-date">13. Jänner 2026</span>
-              <h4>Info-Zoom</h4>
-              <p>Um 18:00 Uhr findet ein Online-Info-Abend statt.</p>
-              <a href="#" className="news-link">Zoom-Link →</a>
-            </div>
-            <div className="news-card glass">
-              <span className="news-date">5. März 2026</span>
-              <h4>Tag der offenen Tür</h4>
-              <p>Von 14:30 bis 17:00 Uhr im Astrid Lindgren Zentrum</p>
-              <Link to="/kontakt" className="news-link">Anmelden →</Link>
-            </div>
-            <div className="news-card glass">
-              <span className="news-tag">Suchen</span>
-              <h4>Zivildiener gesucht</h4>
-              <p>Ab September 2026 freuen wir uns auf Bewerbungen!</p>
-              <Link to="/karriere" className="news-link">Mehr infos →</Link>
-            </div>
+          <div className="auszeichnung">
+            <p className="termin-label">Gratulation</p>
+            <p className="auszeichnung-text">Jutta Höbartner ist Wiener Heldin 2025</p>
+            <a
+              href="https://www.w24.at/Sendungen-A-Z/wienerheldinnen/Alle-Folgen?video=34403"
+              className="pfeil-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              W24-Bericht aus dem Astrid Lindgren Zentrum
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="features-section section">
+      <section className="section home-gesucht">
         <div className="container">
-          <div className="section-header">
-            <h2>Was uns auszeichnet</h2>
-          </div>
-          <div className="features-grid">
-            <div className="feature-card glass">
-              <div className="feature-icon" style={{ background: 'var(--primary-green)' }}>📚</div>
-              <h3>Reformpädagogik</h3>
-              <p>Ganzheitlicher Ansatz mit Fokus auf individuelle Stärken jedes Kindes.</p>
-            </div>
-            <div className="feature-card glass">
-              <div className="feature-icon" style={{ background: 'var(--orange)' }}>🎯</div>
-              <h3>Individuelles Lernen</h3>
-              <p>Selbstbestimmtes Lernen mit persönlichem Tempo und eigenen Zielen.</p>
-            </div>
-            <div className="feature-card glass">
-              <div className="feature-icon" style={{ background: 'var(--purple)' }}>🤝</div>
-              <h3>Projektarbeit</h3>
-              <p>Realitätsnahe Projekte mit praktischem Bezug zur Lebenswelt.</p>
-            </div>
-            <div className="feature-card glass">
-              <div className="feature-icon" style={{ background: 'var(--teal)' }}>🍎</div>
-              <h3>Verpflegung</h3>
-              <p>Frisch gekochte Jause und Mittagessen inklusive.</p>
-            </div>
-          </div>
+          <h2 className="schwung">Wir suchen</h2>
+          <ul className="gesucht-liste">
+            {GESUCHT.map((g) => (
+              <li key={g.titel}>
+                <Link to={g.to}>{g.titel}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      {/* School Levels */}
-      <section className="levels-section section">
+      <section className="section home-netzwerke">
         <div className="container">
-          <div className="section-header">
-            <h2>Unsere Schulstufen</h2>
-          </div>
-          <div className="levels-grid">
-            <div className="level-card glass" style={{ borderTop: '4px solid var(--yellow-green)' }}>
-              <h3>Primaria I</h3>
-              <span className="level-range">1.-4. Schulstufe</span>
-              <p>Spielerisches Lernen mit Fokus auf Grundkompetenzen</p>
-            </div>
-            <div className="level-card glass" style={{ borderTop: '4px solid var(--primary-green)' }}>
-              <h3>Primaria II</h3>
-              <span className="level-range">5.-6. Schulstufe</span>
-              <p>Vertiefung und Vorbereitung auf die Sekundarstufe</p>
-            </div>
-            <div className="level-card glass" style={{ borderTop: '4px solid var(--teal)' }}>
-              <h3>Sekundaria</h3>
-              <span className="level-range">7.-9. Schulstufe</span>
-              <p>Abschluss der Pflichtschule mit individueller Förderung</p>
-            </div>
-            <div className="level-card glass" style={{ borderTop: '4px solid var(--purple)' }}>
-              <h3>Kolleg</h3>
-              <span className="level-range">10.+ Schulstufe</span>
-              <p>Weiterführende Bildungsmöglichkeiten</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="cta-section section">
-        <div className="container">
-          <div className="cta-card glass">
-            <h2>Interessiert?</h2>
-            <p>Vereinbaren Sie einen individuellen Termin für einen Schnuppertag!</p>
-            <div className="cta-buttons">
-              <Link to="/kontakt" className="btn btn-primary">Kontaktieren Sie uns</Link>
-              <Link to="/eltern/interessiert" className="btn btn-secondary">Mehr erfahren</Link>
-            </div>
-          </div>
+          <h2 className="netzwerke-titel">Wir sind Teil von</h2>
+          <ul className="netzwerke-liste">
+            {NETZWERKE.map((n) => <li key={n}>{n}</li>)}
+          </ul>
         </div>
       </section>
     </div>

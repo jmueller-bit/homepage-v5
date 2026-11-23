@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.1.6",
+    "@fontsource/atkinson-hyperlegible-next": "^5.3.0",
+    "@fontsource/young-serif": "^5.3.0",
     "@vercel/analytics": "^1.6.1",
     "contentful": "^11.10.4",
     "react": "^19.2.0",

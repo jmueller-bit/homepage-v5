@@ -43,12 +43,10 @@ function ElternOrganisatorisches() {
 
                 <div className="info-block" style={{ marginBottom: '30px' }}>
                   <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>🕐 Schulzeiten</h3>
-                  <ul style={{ lineHeight: '1.8', color: '#555' }}>
-                    <li><strong>Schulbeginn:</strong> 08:00 Uhr</li>
-                    <li><strong>Schulende:</strong> 15:30 Uhr (Regularunterricht)</li>
-                    <li><strong>Morgenbetreuung:</strong> ab 07:30 Uhr</li>
-                    <li><strong>Nachmittagsbetreuung:</strong> bis 17:00 Uhr</li>
-                  </ul>
+                  <p style={{ lineHeight: '1.6', color: '#555' }}>
+                    Nachmittagsbetreuung bis 16:30 Uhr. Die genauen Unterrichtszeiten stehen in der{' '}
+                    <a href="https://www.astrid-lindgren-zentrum.at/wp-content/uploads/2026/10/TEXT_Kostenubersicht_Schule_v2026-2027.pdf" target="_blank" rel="noopener noreferrer">Kostenübersicht 2026/27 (PDF)</a>.
+                  </p>
                 </div>
 
                 <div className="info-block" style={{ marginBottom: '30px' }}>

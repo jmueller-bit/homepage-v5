@@ -1,10 +1,18 @@
 import { createClient } from 'contentful'
 
-const client = createClient({
-  space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
-  accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
-  environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master'
-})
+const space = import.meta.env.VITE_CONTENTFUL_SPACE_ID
+const accessToken = import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN
+
+// Ohne Zugangsdaten nicht die ganze App abstürzen lassen: nur CMS-Abfragen schlagen fehl
+const client = space && accessToken
+  ? createClient({
+      space,
+      accessToken,
+      environment: import.meta.env.VITE_CONTENTFUL_ENVIRONMENT || 'master'
+    })
+  : {
+      getEntries: () => Promise.reject(new Error('Contentful ist nicht konfiguriert (VITE_CONTENTFUL_* fehlt)'))
+    }
 
 // Helper function to get image URL from asset
 const getImageUrl = (asset) => {

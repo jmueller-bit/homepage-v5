@@ -10,32 +10,20 @@ const sections = [
 ];
 
 const pädagogikItems = [
-  { title: 'Bildungsphilosophie', desc: 'Unsere Vision von ganzheitlicher Bildung' },
-  { title: 'Reformpädagogischer Ansatz', desc: 'Tradition und Innovation' },
-  { title: 'Individuelles Lernen', desc: 'Jedes Kind lernt in seinem Tempo' },
-  { title: 'Projektarbeit & Praxisbezug', desc: 'Lernen durch praktische Projekte' },
+  { title: 'Bildungsphilosophie' },
+  { title: 'Reformpädagogischer Ansatz' },
+  { title: 'Individuelles Lernen' },
+  { title: 'Projektarbeit & Praxisbezug' },
 ];
 
 const schulstufen = [
-  { id: 'vorschule', title: 'Vorschule', age: '4-6 Jahre', desc: 'Spielend lernen und entdecken' },
-  { id: 'stufe1', title: '1. Schulstufe', age: '6-7 Jahre', desc: 'Erste Schritte ins Lernen' },
-  { id: 'stufe2', title: '2. Schulstufe', age: '7-8 Jahre', desc: 'Grundlagen festigen' },
-  { id: 'stufe3', title: '3. Schulstufe', age: '8-9 Jahre', desc: 'Selbstständigkeit fördern' },
-  { id: 'stufe4', title: '4. Schulstufe', age: '9-10 Jahre', desc: 'Projektorientiertes Lernen' },
-  { id: 'stufe5-6', title: '5.-6. Schulstufe', age: '10-12 Jahre', desc: 'Vertieftes Verständnis' },
-  { id: 'stufe7-8', title: '7.-8. Schulstufe', age: '12-14 Jahre', desc: 'Individuelle Förderung' },
-  { id: 'stufe9', title: '9. Schulstufe', age: '14-15 Jahre', desc: 'Abschluss vorbereiten' },
-];
-
-const tagesablauf = [
-  { time: '07:30', activity: 'Betreuung beginnt' },
-  { time: '08:00', activity: 'Beginn des Unterrichts' },
-  { time: '10:00', activity: 'Pause mit Obst & Getränken' },
-  { time: '10:30', activity: 'Unterricht' },
-  { time: '12:00', activity: 'Mittagessen' },
-  { time: '13:00', activity: 'Nachmittagsunterricht / AGs' },
-  { time: '15:30', activity: 'Ende der Regularstunden' },
-  { time: '17:00', activity: 'Späte Betreuung (optional)' },
+  { id: 'stufe1', title: '1. Schulstufe', age: '6-7 Jahre' },
+  { id: 'stufe2', title: '2. Schulstufe', age: '7-8 Jahre' },
+  { id: 'stufe3', title: '3. Schulstufe', age: '8-9 Jahre' },
+  { id: 'stufe4', title: '4. Schulstufe', age: '9-10 Jahre' },
+  { id: 'stufe5-6', title: '5.-6. Schulstufe', age: '10-12 Jahre' },
+  { id: 'stufe7-8', title: '7.-8. Schulstufe', age: '12-14 Jahre' },
+  { id: 'stufe9', title: '9. Schulstufe', age: '14-15 Jahre' },
 ];
 
 function Schule() {
@@ -73,31 +61,16 @@ function Schule() {
                   <Link key={stufe.id} to={`/schule/schulstufen#${stufe.id}`} className="schulstufe-card glass">
                     <h4>{stufe.title}</h4>
                     <span className="age">{stufe.age}</span>
-                    <p>{stufe.desc}</p>
                   </Link>
                 ))}
               </div>
 
-              <h2 style={{ marginTop: '3rem' }}>Ein typischer Tag</h2>
-              <p>Unser Tagesablauf bietet Struktur und Raum für individuelle Entfaltung.</p>
-              <div className="tagesablauf-table glass">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Uhrzeit</th>
-                      <th>Aktivität</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {tagesablauf.map((item, index) => (
-                      <tr key={index}>
-                        <td className="time">{item.time}</td>
-                        <td>{item.activity}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <h2 style={{ marginTop: '3rem' }}>Unterrichtszeiten & Betreuung</h2>
+              <p>
+                Nachmittagsbetreuung bis 16:30 Uhr. Jause und Mittagessen werden frisch in der Schule gekocht.
+                Unterrichtszeiten, Kosten und Elternmitarbeit finden Sie in der{' '}
+                <a href="https://www.astrid-lindgren-zentrum.at/wp-content/uploads/2026/10/TEXT_Kostenubersicht_Schule_v2026-2027.pdf" target="_blank" rel="noopener noreferrer">Kostenübersicht 2026/27 (PDF)</a>.
+              </p>
             </div>
 
             <div className="sidebar">

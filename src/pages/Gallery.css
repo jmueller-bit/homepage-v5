@@ -3,8 +3,8 @@
 }
 
 .gallery-hero {
-  background: linear-gradient(135deg, var(--primary-green) 0%, var(--teal) 100%);
-  color: white;
+  background: var(--paper-deep);
+  color: var(--ink);
   padding: 100px 0 80px;
   text-align: center;
   position: relative;
@@ -28,7 +28,7 @@
 }
 
 .gallery-hero h1 {
-  color: white;
+  color: var(--ink);
   margin-bottom: 16px;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .gallery-card:hover {
-  transform: translateY(-5px);
+  
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
@@ -82,9 +82,9 @@
   top: 12px;
   left: 12px;
   background: var(--orange);
-  color: white;
+  color: var(--ink);
   padding: 4px 12px;
-  border-radius: 20px;
+  border-radius: var(--radius);
   font-size: 0.8rem;
   font-weight: 600;
 }

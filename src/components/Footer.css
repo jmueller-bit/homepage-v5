@@ -99,7 +99,7 @@
 
 .social-links a:hover {
   background: var(--primary-green-dark);
-  transform: translateY(-3px);
+  
 }
 
 .footer-bottom {
