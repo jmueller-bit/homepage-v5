@@ -1,0 +1,109 @@
+/* Bildansicht: dunkler Grund, drei Folien nebeneinander, mittlere sichtbar */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background: rgba(20, 17, 14, 0.96);
+  color: #fff;
+}
+
+.lightbox-viewport {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y; /* waagrecht wischt die Ansicht, senkrecht bleibt dem Browser */
+  cursor: grab;
+  user-select: none;
+}
+
+.lightbox-viewport:active {
+  cursor: grabbing;
+}
+
+.lightbox-spur {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  transform: translate3d(calc(-100% / 3), 0, 0);
+}
+
+.lightbox-folie {
+  flex: 0 0 calc(100% / 3);
+  display: grid;
+  place-items: center;
+  padding: 64px 16px 16px;
+}
+
+.lightbox-folie img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius);
+  -webkit-user-drag: none; /* kein natives Bild-Ziehen, das Wischen übernimmt die Ansicht */
+}
+
+.lightbox-caption {
+  padding: 12px 24px 24px;
+  text-align: center;
+}
+
+.lightbox-caption h3 {
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.lightbox-caption p {
+  opacity: 0.85;
+}
+
+.lightbox-zaehler {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9rem;
+}
+
+.lightbox-nav,
+.lightbox-close {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 150ms var(--ease), transform 100ms var(--ease);
+}
+
+.lightbox-nav:hover,
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* Sofortiges Feedback beim Drücken */
+.lightbox-nav:active,
+.lightbox-close:active {
+  transform: scale(0.92);
+}
+
+.lightbox-nav {
+  top: 50%;
+  margin-top: -24px;
+}
+
+.lightbox-prev { left: 16px; }
+.lightbox-next { right: 16px; }
+
+.lightbox-close {
+  top: 12px;
+  right: 12px;
+  font-size: 2rem;
+}
+
+/* Am Handy wischt man; die Pfeile würden nur das Bild verdecken */
+@media (hover: none) and (pointer: coarse) {
+  .lightbox-nav { display: none; }
+}

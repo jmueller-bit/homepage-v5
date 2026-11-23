@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { NAV } from '../data/navigation';
 import './Header.css';
@@ -6,6 +6,14 @@ import './Header.css';
 function Header() {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+
+  // Escape schließt das offene Menü
+  useEffect(() => {
+    if (!open) return undefined;
+    const taste = (e) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', taste);
+    return () => window.removeEventListener('keydown', taste);
+  }, [open]);
 
   return (
     <header className="header">

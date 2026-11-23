@@ -157,10 +157,43 @@
     background: var(--paper);
     border-bottom: 1px solid var(--rule);
     padding: 8px 20px 24px;
-    display: none;
+    /* Gleitet aus dem Header heraus und auf demselben Weg zurück; CSS-Übergänge kehren
+       mitten in der Bewegung vom aktuellen Wert aus um, wenn man schnell erneut tippt */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transform-origin: top center;
+    transition:
+      opacity 180ms var(--ease),
+      transform 260ms cubic-bezier(0.2, 0.9, 0.25, 1),
+      visibility 0s linear 260ms;
   }
 
-  .nav-open { display: block; }
+  .nav-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 180ms var(--ease),
+      transform 260ms cubic-bezier(0.2, 0.9, 0.25, 1),
+      visibility 0s;
+  }
+
+  /* Untermenüs folgen leicht versetzt: die Bewegung zeigt, wohin das Menü aufklappt */
+  .nav-open .nav-item {
+    animation: menue-zeile 260ms cubic-bezier(0.2, 0.9, 0.25, 1) both;
+  }
+
+  .nav-open .nav-item:nth-child(2) { animation-delay: 20ms; }
+  .nav-open .nav-item:nth-child(3) { animation-delay: 40ms; }
+  .nav-open .nav-item:nth-child(4) { animation-delay: 60ms; }
+  .nav-open .nav-item:nth-child(5) { animation-delay: 80ms; }
+  .nav-open .nav-item:nth-child(n+6) { animation-delay: 100ms; }
+
+  @keyframes menue-zeile {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: none; }
+  }
 
   .nav-liste {
     flex-direction: column;
@@ -181,7 +214,7 @@
   .dropdown {
     position: static;
     opacity: 1;
-    visibility: visible;
+    visibility: inherit; /* folgt dem Menü: geschlossen = nicht klickbar, nicht fokussierbar */
     transform: none;
     min-width: 0;
     padding: 0 0 8px 16px;

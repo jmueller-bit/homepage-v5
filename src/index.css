@@ -111,7 +111,7 @@ body {
   text-decoration: none;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: background-color 150ms var(--ease), color 150ms var(--ease), border-color 150ms var(--ease);
+  transition: background-color 150ms var(--ease), color 150ms var(--ease), border-color 150ms var(--ease), transform 120ms var(--ease);
 }
 
 .btn-primary {
@@ -271,7 +271,8 @@ p, li {
 
 /* Mikro-Interaktionen: kurz, nur transform/opacity, bei reduzierter Bewegung aus */
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+  transition-duration: 0ms; /* Drücken wirkt sofort, Loslassen federt zurück */
 }
 
 @media (hover: hover) {

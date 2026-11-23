@@ -23,6 +23,7 @@ node src/data/termine.test.mjs      # Logik „nächster Termin“
 node src/data/navigation.test.mjs   # jeder Navigationslink hat eine Route in App.jsx
 node src/data/team.test.mjs         # Contentful-Team mit Live-Porträts zusammenführen
 node src/services/contentfulMapper.test.mjs  # News: fehlende Felder automatisch ergänzen
+node src/lib/feder.test.mjs         # Feder-Animation, Schwung-Projektion, Gummiband
 ```
 
 ## Umgebungsvariablen
@@ -34,6 +35,7 @@ Contentful braucht `VITE_CONTENTFUL_SPACE_ID` und `VITE_CONTENTFUL_ACCESS_TOKEN`
 - **Inhaltsregel**: Keine erfundenen Inhalte. Quelle sind die gesicherten Texte der Live-Seite in `docs/analyse/inhalte/`; offene Widersprüche stehen in `docs/analyse/ANALYSE.md` (nur lokal, nicht im öffentlichen Repo). Design-Regeln in `DESIGN.md`.
 - **Navigation**: `src/data/navigation.js` ist die einzige Quelle für Header, Footer, Sitemap und die Bereichsnavigation der Unterseiten. Nur Seiten eintragen, die eine eigene `<Route>` in `src/App.jsx` haben (der Navigationstest prüft das). Bereichsrouten sind exakt (`/eltern`, nicht `/eltern/*`); unbekannte Pfade landen auf `NichtGefunden`. Unterseiten außer der Startseite werden per `React.lazy` geladen.
 - **Seiten**: Unterseiten nutzen `src/components/PageLayout.jsx` (Titel, Lead, Lesespalte, Bereichsnavigation, Kontaktbox) mit den Bausteinen `.weg-liste`, `.daten`, `.hinweis` aus `PageLayout.css`. Titel/Beschreibung setzt `PageMeta` (React 19 hebt `<title>`/`<meta>` in den Head). Wiederverwendete Inhalte (Aufnahmeverfahren, Netzwerke, Bankdaten, Downloads …) liegen in `src/data/inhalte.js`, Kontaktdaten in `src/data/kontakt.js`, Termine in `src/data/termine.js`.
+- **Bewegung**: Gesten (Bildansicht in `Lightbox.jsx`) laufen über `src/lib/feder.js`: Federn nach Apples Parametern (response, Dämpfung), jederzeit unterbrechbar, Wurf-Projektion, Gummiband an Rändern. Bei `prefers-reduced-motion` springen sie ohne Animation.
 - **Styles**: Design-Tokens in `src/index.css` (`--paper`, `--ink`, `--accent` …); alte Variablennamen (`--primary-green` …) sind nur noch Aliase. Keine Inline-Styles, keine Emojis als Icons.
 - **Contentful**: `src/services/contentful.js` enthält den Client und je Content-Type eine Fetch-Funktion (`newsArtikel`, `teamMitglied`, `galleryImage`, `stellenangebot`). Feldnamen im CMS sind deutsch (`titel`, `slug`, `datum`, `inhalt`, `titelbild` …). `contentfulMapper.js` mappt Einträge auf englische Frontend-Objekte. Rich Text wird mit `@contentful/rich-text-react-renderer` gerendert.
 - **Contentful-Modell (Space alz-home)**: Neuigkeit (`newsArtikel`, Pflicht nur Titel + Inhalt), Fotoalbum (`galleryImage`), Teammitglied (`teamMitglied`), Stellenanzeige (`stellen`), Termin (`termin`). Feld-IDs sind deutsch und klein. `schuleEvent` ist ein Altbestand und wird nicht abgefragt. Anleitung für Lehrer:innen: `docs/ANLEITUNG-LEHRER.md`.

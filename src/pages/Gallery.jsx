@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getGalleryAlben } from '../services/contentful';
 import { ALBEN, BAND } from '../data/bilder';
 import BildBand from '../components/BildBand';
+import Lightbox from '../components/Lightbox';
 import './Gallery.css';
 import PageMeta from '../components/PageMeta';
 
@@ -52,23 +53,10 @@ function Gallery() {
     setSelectedImage(index);
   };
 
-  const closeLightbox = () => {
-    setSelectedImage(null);
-  };
+  // Stabil, damit die Bildansicht ihre Tastatur- und Fokus-Logik nicht bei jedem Rendern neu aufsetzt
+  const closeLightbox = useCallback(() => setSelectedImage(null), []);
 
-  const showPrev = (e) => {
-    e.stopPropagation();
-    if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 0 ? images.length - 1 : selectedImage - 1);
-    }
-  };
 
-  const showNext = (e) => {
-    e.stopPropagation();
-    if (selectedImage !== null) {
-      setSelectedImage(selectedImage === images.length - 1 ? 0 : selectedImage + 1);
-    }
-  };
 
   return (
     <div className="gallery-page" data-farbe="ocker">
@@ -131,35 +119,7 @@ function Gallery() {
       </section>
 
       {selectedImage !== null && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <button className="lightbox-nav lightbox-prev" onClick={showPrev}>
-            ←
-          </button>
-          
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={images[selectedImage].src}
-              alt={images[selectedImage].alt}
-            />
-            <div className="lightbox-caption">
-              <h3>{images[selectedImage].title}</h3>
-              <p>{images[selectedImage].category}</p>
-              {images[selectedImage].description && (
-                <p className="lightbox-description">
-                  {images[selectedImage].description}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <button className="lightbox-nav lightbox-next" onClick={showNext}>
-            →
-          </button>
-
-          <button className="lightbox-close" onClick={closeLightbox}>
-            ×
-          </button>
-        </div>
+        <Lightbox bilder={images} start={selectedImage} onClose={closeLightbox} />
       )}
     </div>
   );
