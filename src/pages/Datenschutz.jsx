@@ -1,23 +1,15 @@
-import { Link } from 'react-router-dom';
-import './PageTemplate.css';
-import PageMeta from '../components/PageMeta';
+
+import PageLayout from '../components/PageLayout';
+import './Rechtliches.css';
 
 function Datenschutz() {
   return (
-    <div className="page-template">
-      <PageMeta title="Datenschutzerklärung" description="Datenschutzerklärung des Astrid Lindgren Zentrums." />
-      <section className="page-hero">
-        <div className="container">
-          <h1>Datenschutzerklärung</h1>
-          <p className="hero-subtitle">Informationen zum Datenschutz nach DSGVO</p>
-        </div>
-      </section>
-
-      <section className="page-content section">
-        <div className="container">
-          <div className="content-grid">
-            <div className="main-content glass">
-              <div className="legal-content">
+    <PageLayout
+      title="Datenschutzerklärung"
+      lead="Informationen zum Datenschutz nach DSGVO."
+      description="Datenschutzerklärung des Astrid Lindgren Zentrums."
+    >
+      <div className="legal-content">
                 <h2>Einleitung und Überblick</h2>
                 <p>Wir haben diese Datenschutzerklärung verfasst, um Ihnen gemäß der Vorgaben der Datenschutz-Grundverordnung (EU) 2016/679 und anwendbaren nationalen Gesetzen zu erklären, welche personenbezogenen Daten wir als Verantwortliche verarbeiten, zukünftig verarbeiten werden und welche rechtmäßigen Möglichkeiten Sie haben.</p>
 
@@ -131,20 +123,8 @@ function Datenschutz() {
                   E-Mail: dsb@dsb.gv.at<br />
                   Web: <a href="https://www.dsb.gv.at/" target="_blank" rel="noopener noreferrer">www.dsb.gv.at</a></p>
                 </div>
-              </div>
-            </div>
-
-            <div className="sidebar">
-              <div className="sidebar-menu glass">
-                <h4>Rechtliches</h4>
-                <Link to="/impressum" className="sidebar-link">Impressum</Link>
-                <Link to="/datenschutz" className="sidebar-link active">Datenschutz</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </PageLayout>
   );
 }
 

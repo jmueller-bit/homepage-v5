@@ -1,6 +1,7 @@
 .footer {
-  margin-top: 80px;
-  padding: 60px 0 30px;
+  padding: 64px 0 32px;
+  background: var(--paper-deep);
+  border-top: 1px solid var(--rule);
 }
 
 .footer-container {
@@ -11,49 +12,37 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 40px;
   margin-bottom: 40px;
 }
 
 .footer-logo {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.footer-logo .logo-main {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--primary-green);
-}
-
-.footer-logo .logo-sub {
-  font-size: 0.95rem;
-  color: var(--ocker-text);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.footer-tagline {
-  font-size: 1.1rem;
-  color: var(--dark-gray);
-  margin-bottom: 10px;
-  font-weight: 500;
+  display: block;
+  width: auto;
+  height: 96px;
+  margin-bottom: 16px;
 }
 
 .footer-desc {
-  font-size: 0.95rem;
-  color: #666;
-  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 24em;
+}
+
+.footer-col address {
+  font-style: normal;
+  color: var(--ink-muted);
+  margin-bottom: 4px;
 }
 
 .footer-col h2 {
   font-family: var(--font-body);
-  font-size: 1rem;
-  color: var(--primary-green);
-  margin-bottom: 15px;
-  font-weight: 600;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 8px;
 }
 
 .footer-col a {
@@ -71,7 +60,7 @@
 
 .footer-col p {
   font-size: 0.95rem;
-  color: #555;
+  color: var(--ink-muted);
   margin-bottom: 8px;
 }
 
@@ -94,14 +83,14 @@
   justify-content: center;
   width: var(--tap);
   height: var(--tap);
-  background: var(--primary-green);
+  background: var(--ink);
   color: white;
   border-radius: 50%;
   transition: all 0.3s ease;
 }
 
 .social-links a:hover {
-  background: var(--primary-green-dark);
+  background: var(--accent);
   
 }
 
@@ -117,7 +106,7 @@
 
 .footer-bottom p {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--ink-muted);
 }
 
 .footer-links {
@@ -130,11 +119,11 @@
   align-items: center;
   min-height: var(--tap);
   font-size: 0.95rem;
-  color: #666;
+  color: var(--ink-muted);
 }
 
 .footer-links a:hover {
-  color: var(--primary-green);
+  color: var(--accent);
 }
 
 @media (max-width: 768px) {

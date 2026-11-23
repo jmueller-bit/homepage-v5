@@ -1,23 +1,33 @@
 import { useState, useEffect } from 'react';
 import { getGalleryImages } from '../services/contentful';
+import { ALBEN } from '../data/bilder';
 import './Gallery.css';
 import PageMeta from '../components/PageMeta';
 
+// Fotos der Live-Seite, solange Contentful leer oder nicht erreichbar ist
+const LOKALE_BILDER = ALBEN.flatMap((album) =>
+  album.bilder.map((b) => ({
+    id: b.src,
+    src: `${b.src}-1600.webp`,
+    thumb: `${b.src}-640.webp`,
+    alt: b.alt,
+    title: '',
+    category: `${album.titel} · ${album.datum}`,
+  }))
+);
+
 function Gallery() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Lokale Fotos sofort zeigen (kein Layout-Sprung); Contentful ersetzt sie, sobald es Bilder liefert
+  const [images, setImages] = useState(LOKALE_BILDER);
   const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const galleryImages = await getGalleryImages();
-        setImages(galleryImages);
-        setLoading(false);
-      } catch (err) {
-        setError('Fehler beim Laden der Galerie');
-        setLoading(false);
+        if (galleryImages.length) setImages(galleryImages);
+      } catch {
+        // CMS nicht erreichbar: lokale Fotos bleiben stehen
       }
     };
 
@@ -46,36 +56,8 @@ function Gallery() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="gallery-page">
-        <PageMeta title="Galerie" description="Bilder aus dem Schulalltag der Astrid Lindgren Schule." />
-        <section className="gallery-hero">
-          <div className="container">
-            <h1>Galerie</h1>
-            <p className="hero-subtitle">Laden...</p>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="gallery-page">
-        <PageMeta title="Galerie" description="Bilder aus dem Schulalltag der Astrid Lindgren Schule." />
-        <section className="gallery-hero">
-          <div className="container">
-            <h1>Galerie</h1>
-            <p className="hero-subtitle error">{error}</p>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
-    <div className="gallery-page">
+    <div className="gallery-page" data-farbe="ocker">
       <PageMeta title="Galerie" description="Bilder aus dem Schulalltag der Astrid Lindgren Schule." />
       <section className="gallery-hero">
         <div className="container">
@@ -88,27 +70,29 @@ function Gallery() {
 
       <section className="gallery-content section">
         <div className="container">
+          <h2 className="sr-only">Bilder</h2>
           {images.length === 0 ? (
             <div className="gallery-empty glass">
               <h3>Keine Bilder vorhanden</h3>
               <p>Derzeit sind keine Bilder in der Galerie verfügbar.</p>
-              <p className="gallery-empty-hint">
-                Sobald neue Bilder in Contentful hinzugefügt werden, erscheinen sie hier automatisch.
-              </p>
             </div>
           ) : (
             <div className="gallery-grid">
               {images.map((image, index) => (
-                <div
+                <button
+                  type="button"
                   key={image.id}
                   className="gallery-card glass"
                   onClick={() => openLightbox(index)}
                 >
+                  <span className="sr-only">Bild vergrößern: {image.alt}</span>
                   <div className="gallery-card-image">
                     <img
-                      src={image.src}
-                      alt={image.alt}
+                      src={image.thumb || image.src}
+                      alt=""
                       loading="lazy"
+                      width="640"
+                      height="480"
                     />
                     {image.category && (
                       <span className="gallery-card-category">
@@ -116,13 +100,15 @@ function Gallery() {
                       </span>
                     )}
                   </div>
-                  <div className="gallery-card-content">
-                    <h3 className="gallery-card-title">{image.title}</h3>
-                    {image.description && (
-                      <p className="gallery-card-description">{image.description}</p>
-                    )}
-                  </div>
-                </div>
+                  {image.title && (
+                    <div className="gallery-card-content">
+                      <h3 className="gallery-card-title">{image.title}</h3>
+                      {image.description && (
+                        <p className="gallery-card-description">{image.description}</p>
+                      )}
+                    </div>
+                  )}
+                </button>
               ))}
             </div>
           )}

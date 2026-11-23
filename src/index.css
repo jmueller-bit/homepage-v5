@@ -18,16 +18,24 @@
   --ink: #2B2620;
   --ink-muted: #5C5248;
   --rule: #E2D7C3;
-  --logo-ocker: #E8A838;
-  --logo-rot: #C44536;
-  --logo-gruen: #5A8F5A;
-  --accent: #B23A2E;
-  --accent-hover: #9A3127;
-  --green-text: #3F6E40;
-  --ocker-text: #8A5A0B;
+  --logo-ocker: #F7A600;
+  --logo-rot: #C73729;
+  --logo-gruen: #5E9345;
+  --accent: #C73729;
+  --accent-hover: #A92E22;
+  --green-text: #3F6E2C;
+  --ocker-text: #8A5A00;
 
   --font-heading: 'Young Serif', 'Young Serif Fallback', Georgia, serif;
   --font-body: 'Atkinson Hyperlegible Next', 'Atkinson Fallback', system-ui, sans-serif;
+
+  /* Bereichsfarben: Logofarbe (Flächen), textsichere Variante, heller Ton */
+  --gruen-tint: #E6EFDF;
+  --ocker-tint: #FCEBC8;
+  --rot-tint: #F6DCD7;
+  --bereich: var(--logo-rot);
+  --bereich-text: var(--accent);
+  --bereich-tint: var(--paper-deep);
 
   --radius-sm: 4px;
   --radius: 8px;
@@ -36,7 +44,7 @@
 
   /* Alt-Namen der bisherigen Seiten, auf neue Tokens gemappt bis zur Migration */
   --primary-green: var(--green-text);
-  --primary-green-dark: #2F5530;
+  --primary-green-dark: #2F5321;
   --orange: var(--logo-ocker);
   --red: var(--accent);
   --yellow-green: var(--logo-ocker);
@@ -122,7 +130,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background: #D6962A;
+  background: #E09700;
   color: var(--ink);
 }
 
@@ -158,14 +166,15 @@ h2 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-bottom: 16px; }
 h3 { font-size: 1.25rem; margin-bottom: 8px; }
 h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
 
+/* Links dunkler als das Logo-Rot: bleibt auch auf getönten Flächen ≥ 4.5:1 */
 a {
-  color: var(--accent);
+  color: var(--accent-hover);
   text-underline-offset: 3px;
   transition: color 150ms var(--ease);
 }
 
 a:hover {
-  color: var(--accent-hover);
+  color: #8A2519;
 }
 
 @media (max-width: 768px) {
@@ -253,6 +262,7 @@ a[href^="mailto:"] {
 
 h1, h2, h3 {
   text-wrap: balance;
+  hyphens: manual; /* keine Trennung in Eigennamen wie „As-trid“ */
 }
 
 p, li {
@@ -269,3 +279,18 @@ p, li {
     transform: translateY(-1px);
   }
 }
+
+/* Nur für Screenreader sichtbar */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Bereichsfarben, gesetzt über data-farbe (PageLayout, Galerie, News) */
+[data-farbe="gruen"] { --bereich: var(--logo-gruen); --bereich-text: var(--green-text); --bereich-tint: var(--gruen-tint); }
+[data-farbe="ocker"] { --bereich: var(--logo-ocker); --bereich-text: var(--ocker-text); --bereich-tint: var(--ocker-tint); }
+[data-farbe="rot"] { --bereich: var(--logo-rot); --bereich-text: var(--accent); --bereich-tint: var(--rot-tint); }

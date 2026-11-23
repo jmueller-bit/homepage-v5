@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import Header from './components/Header';
@@ -22,7 +22,11 @@ const Kontakt = lazy(() => import('./pages/Kontakt'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Impressum = lazy(() => import('./pages/Impressum'));
 const Datenschutz = lazy(() => import('./pages/Datenschutz'));
+const NichtGefunden = lazy(() => import('./pages/NichtGefunden'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
+const Philosophie = lazy(() => import('./pages/Philosophie'));
+const Netzwerke = lazy(() => import('./pages/Netzwerke'));
+const Verein = lazy(() => import('./pages/Verein'));
 import Footer from './components/Footer';
 import MobileActionBar from './components/MobileActionBar';
 
@@ -35,24 +39,28 @@ function App() {
           <Suspense fallback={<div className="page-loading" />}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/schule/*" element={<Schule />} />
+            <Route path="/schule" element={<Schule />} />
             <Route path="/eltern/anmeldung" element={<ElternAnmeldung />} />
             <Route path="/eltern/services" element={<ElternServices />} />
             <Route path="/eltern/organisatorisches" element={<ElternOrganisatorisches />} />
-            <Route path="/eltern/*" element={<FuersEltern />} />
+            <Route path="/eltern" element={<FuersEltern />} />
             <Route path="/schulleben/*" element={<Schulleben />} />
-            <Route path="/schulleben/galerie" element={<Gallery />} />
-            <Route path="/ueber-uns/*" element={<UeberUns />} />
+            <Route path="/schulleben/galerie" element={<Navigate to="/galerie" replace />} />
+            <Route path="/ueber-uns" element={<UeberUns />} />
             <Route path="/ueber-uns/team" element={<Team />} />
-            <Route path="/unterstuetzen/*" element={<Unterstuetzen />} />
+            <Route path="/ueber-uns/philosophie" element={<Philosophie />} />
+            <Route path="/ueber-uns/netzwerke" element={<Netzwerke />} />
+            <Route path="/ueber-uns/verein" element={<Verein />} />
+            <Route path="/unterstuetzen" element={<Unterstuetzen />} />
             <Route path="/karriere/stellen" element={<Stellen />} />
             <Route path="/karriere/initiativ" element={<Initiativbewerbung />} />
-            <Route path="/karriere/*" element={<Karriere />} />
-            <Route path="/kontakt/*" element={<Kontakt />} />
+            <Route path="/karriere" element={<Karriere />} />
+            <Route path="/kontakt" element={<Kontakt />} />
             <Route path="/galerie" element={<Gallery />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="*" element={<NichtGefunden />} />
           </Routes>
           </Suspense>
         </main>

@@ -1,164 +1,50 @@
 import { Link } from 'react-router-dom';
-import './PageTemplate.css';
-import PageMeta from '../components/PageMeta';
-
-const sections = [
-  { path: '/eltern/interessiert', title: 'Interessiert?' },
-  { path: '/eltern/anmeldung', title: 'Anmeldung & Kosten' },
-  { path: '/eltern/services', title: 'Eltern-Services' },
-  { path: '/eltern/mitwirkung', title: 'Elternmitwirkung' },
-  { path: '/eltern/organisatorisches', title: 'Organisatorisches' },
-  { path: '/eltern/rechtliches', title: 'Rechtliches' },
-];
+import PageLayout from '../components/PageLayout';
+import AufnahmeWeg from '../components/AufnahmeWeg';
+import { DOWNLOADS } from '../data/inhalte';
+import { KONTAKT } from '../data/kontakt';
 
 function ElternAnmeldung() {
   return (
-    <div className="page-template">
-      <PageMeta title="Anmeldung" description="Anmeldung an der Astrid Lindgren Schule: Erstkontakt, persönliches Gespräch, Hospitation von Eltern und Kind, Abschlussgespräch und Vertrag." />
-      <section className="page-hero">
-        <div className="container">
-          <h1>Anmeldung</h1>
-          <p className="hero-subtitle">Wir begleiten Sie und Ihr Kind auf dem Weg zu uns - Schritt für Schritt</p>
-        </div>
-      </section>
+    <PageLayout
+      title="Anmeldung & Kosten"
+      metaTitle="Anmeldung"
+      lead="Damit Sie und Ihr Kind die Schule richtig „von innen“ kennenlernen und dann entscheiden können, ob sie für Sie passt."
+      description="Anmeldung an der Astrid Lindgren Schule: Erstkontakt, persönliches Gespräch, Hospitation von Eltern und Kind, Abschlussgespräch und Vertrag."
+    >
+      <h2>Erster Kontakt</h2>
+      <p>
+        Die erste Kontaktaufnahme kann telefonisch, per E-Mail, an einem Tag der offenen Tür oder
+        einem Informationsabend erfolgen. Für ein Erstgespräch oder eine Hospitation vereinbaren Sie
+        bitte einen Termin: <a href={KONTAKT.telHref}>{KONTAKT.telefon}</a>.
+      </p>
+      <p className="hinweis">
+        Anmeldungen für das neue Schuljahr sind grundsätzlich bis März möglich. Nach Rücksprache ist
+        auch eine Anmeldung im laufenden Schuljahr möglich.
+      </p>
 
-      <section className="page-content section">
-        <div className="container">
-          <div className="content-grid">
-            <div className="main-content glass">
-              <h2>Informationen zur Anmeldung</h2>
-              <p style={{ lineHeight: '1.7', marginBottom: '25px' }}>
-                Die erste Kontaktaufnahme kann telefonisch, per E-Mail, an einem Tag der offenen Tür, 
-                einem Informationsabend oder ähnlichem erfolgen.
-              </p>
-              <p style={{ lineHeight: '1.7', marginBottom: '30px' }}>
-                Unsere Kontaktdaten finden Sie unten oder auf der <Link to="/kontakt">Kontaktseite</Link>.
-              </p>
+      <h2>Das Aufnahmeverfahren</h2>
+      <p>
+        Die Wahl der richtigen Schule ist ein wichtiger Schritt für jede Familie. Auch wir lernen Sie
+        im Zuge der Hospitationen gut kennen.
+      </p>
+      <AufnahmeWeg schmal />
 
-              <div className="info-highlight" style={{ 
-                background: 'rgba(247, 166, 0, 0.1)', 
-                padding: '25px', 
-                borderRadius: '12px',
-                borderLeft: '4px solid var(--orange)',
-                marginBottom: '40px'
-              }}>
-                <h3 style={{ color: 'var(--dark-gray)', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  Wichtige Information
-                </h3>
-                <p style={{ lineHeight: '1.7', color: '#555' }}>
-                  Anmeldungen für das neue Schuljahr sind grundsätzlich <strong>bis März</strong> möglich. 
-                  Nach Rücksprache ist auch eine Anmeldung im laufenden Schuljahr möglich.
-                </p>
-                <p style={{ marginTop: '15px', lineHeight: '1.7', color: '#555' }}>
-                  Für ein Erstgespräch oder bei Interesse an einer Hospitation vereinbaren Sie bitte einen Termin.
-                </p>
-              </div>
+      <h2>Kosten</h2>
+      <p>
+        Schulstufen, Unterrichtszeiten, Kosten, Mittagessen, Nachmittagsbetreuung und Elternmitarbeit
+        stehen in der Übersicht für das Schuljahr 2026/27.
+      </p>
+      <a href={DOWNLOADS.kosten.href} className="btn btn-primary" target="_blank" rel="noopener noreferrer">
+        {DOWNLOADS.kosten.label}
+      </a>
 
-              <h3 style={{ color: 'var(--primary-green)', marginBottom: '25px', marginTop: '40px' }}>
-                Termine für Informationsveranstaltungen
-              </h3>
-
-              <div className="event-cards" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div className="event-card glass" style={{ padding: '25px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                    <h4 style={{ margin: 0, color: 'var(--primary-green)' }}>Tage der offenen Tür</h4>
-                  </div>
-                  <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                    Oktober und März - jeweils ein Tag im Schuljahr
-                  </p>
-                </div>
-
-                <div className="event-card glass" style={{ padding: '25px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                    <h4 style={{ margin: 0, color: 'var(--primary-green)' }}>Info-Nachmittage</h4>
-                  </div>
-                  <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                    Regelmäßig im Schuljahr - Termine unter <Link to="/schulleben/news" style={{ color: 'var(--primary-green)' }}>Aktuelles</Link>
-                  </p>
-                </div>
-
-                <div className="event-card glass" style={{ padding: '25px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                    <h4 style={{ margin: 0, color: 'var(--primary-green)' }}>Persönliche Termine</h4>
-                  </div>
-                  <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
-                    Nach Vereinbarung für Erstgespräche und Hospitationen
-                  </p>
-                </div>
-              </div>
-
-              <div className="news-cta" style={{ marginTop: '30px', padding: '20px', background: 'rgba(94, 147, 69, 0.05)', borderRadius: '8px' }}>
-                <p style={{ margin: 0, color: '#555' }}>
-                  Aktuelle Termine finden Sie unter <Link to="/schulleben/news" style={{ color: 'var(--primary-green)', fontWeight: '600' }}>Aktuelles</Link>
-                </p>
-              </div>
-
-              <div className="cta-section" style={{ 
-                marginTop: '50px', 
-                padding: '40px', 
-                background: 'linear-gradient(135deg, var(--primary-green) 0%, var(--teal) 100%)',
-                borderRadius: '16px',
-                color: 'white',
-                textAlign: 'center'
-              }}>
-                <h3 style={{ color: 'white', marginBottom: '15px', fontSize: '1.5rem' }}>
-                  Wir freuen uns auf Sie!
-                </h3>
-                <p style={{ marginBottom: '25px', opacity: 0.95, maxWidth: '500px', margin: '0 auto 25px' }}>
-                  Beginnen Sie jetzt den Weg zu einer ganzheitlichen Bildung für Ihr Kind. 
-                  Kontaktieren Sie uns für ein Erstgespräch.
-                </p>
-                <Link to="/kontakt" className="btn btn-primary" style={{ 
-                  background: 'white', 
-                  color: 'var(--primary-green)',
-                  fontSize: '1.1rem',
-                  padding: '15px 35px'
-                }}>
-                  Kontakt aufnehmen
-                </Link>
-              </div>
-
-              <div className="back-link" style={{ marginTop: '40px', textAlign: 'center' }}>
-                <Link to="/eltern" style={{ color: 'var(--ink-muted)', display: 'inline-flex', alignItems: 'center', gap: '8px', minHeight: 'var(--tap)' }}>
-                  ← Zurück zur Eltern-Übersicht
-                </Link>
-              </div>
-            </div>
-
-            <div className="sidebar">
-              <div className="sidebar-menu glass">
-                <h4>Navigation</h4>
-                {sections.map((section) => (
-                  <Link 
-                    key={section.path} 
-                    to={section.path} 
-                    className={`sidebar-link ${section.path === '/eltern/anmeldung' ? 'active' : ''}`}
-                  >
-                    {section.title}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="sidebar-cta glass">
-                <h4>Fragen zur Anmeldung?</h4>
-                <p>Wir beraten Sie gerne persönlich zu unserem Aufnahmeprozess.</p>
-                <Link to="/kontakt" className="btn btn-primary">Kontakt</Link>
-              </div>
-
-              <div className="sidebar-contact glass" style={{ marginTop: '25px' }}>
-                <h4>Schnellkontakt</h4>
-                <p style={{ marginBottom: '8px' }}>
-                  <a href="tel:+4318874053" style={{ color: 'var(--primary-green)' }}>+43 1 887 40 53</a>
-                </p>
-                <p>
-                  <a href="mailto:office@astrid-lindgren-zentrum.at" style={{ color: 'var(--primary-green)' }}>office@astrid-lindgren-zentrum.at</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      <h2>Informationsveranstaltungen</h2>
+      <p>
+        In jedem Schuljahr finden regelmäßig Info-Nachmittage und Tage der offenen Tür statt.
+        Den nächsten Termin finden Sie auf der <Link to="/">Startseite</Link>.
+      </p>
+    </PageLayout>
   );
 }
 

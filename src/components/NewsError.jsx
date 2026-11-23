@@ -1,10 +1,11 @@
 import './NewsError.css'
 
-function NewsError({ message, onRetry }) {
+// Technische Fehlermeldung nur in der Konsole, Eltern sehen einen verständlichen Satz
+function NewsError({ onRetry }) {
   return (
     <div className="news-error glass">
-      <h3>Ein Fehler ist aufgetreten</h3>
-      <p>{message || 'Die News konnten nicht geladen werden.'}</p>
+      <h2>Die Neuigkeiten konnten nicht geladen werden</h2>
+      <p>Bitte versuchen Sie es in ein paar Minuten noch einmal.</p>
       {onRetry && (
         <button onClick={onRetry} className="btn btn-primary">
           Erneut versuchen

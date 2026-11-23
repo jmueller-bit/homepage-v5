@@ -34,7 +34,7 @@ Quelle Branchendaten: ui-ux-pro-max (`product`: Educational / Kids Learning → 
 
 ## 4. Farben
 
-Abgeleitet aus dem Logo (`public/images/logos/alz-logo.svg`: Ocker `#E8A838`, Rot `#C44536`, Grün `#5A8F5A`) und den Fotos (Papier, Holz). Kontraste gegen `--paper` gemessen.
+Abgeleitet aus dem Original-Logo (`public/images/logos/alz-logo-wortmarke.png`, gemessen: Ocker `#F7A600`, Rot `#C73729`, Grün `#5E9345`) und den Fotos (Papier, Holz). Kontraste gegen `--paper` gemessen.
 
 | Token | Hex | Rolle | Kontrast |
 |---|---|---|---|
@@ -43,15 +43,17 @@ Abgeleitet aus dem Logo (`public/images/logos/alz-logo.svg`: Ocker `#E8A838`, Ro
 | `--ink` | `#2B2620` | Fließtext, Überschriften | 14.0:1 |
 | `--ink-muted` | `#5C5248` | Nebentext, Metadaten | 7.1:1 |
 | `--rule` | `#E2D7C3` | Linien, Ränder | dekorativ |
-| `--logo-ocker` | `#E8A838` | Flächen, Linienschwung, Markierungen – **nie Textfarbe** | 1.9:1 |
-| `--logo-rot` | `#C44536` | Logo-Wiedergabe | – |
-| `--logo-gruen` | `#5A8F5A` | Logo-Wiedergabe, große Flächen | 3.6:1 |
-| `--accent` | `#B23A2E` | Primäre Aktion (Buttons, Links), Termine | 5.6:1 · Weiß darauf 5.9:1 |
-| `--accent-hover` | `#9A3127` | Hover/Active | 6.9:1 |
-| `--green-text` | `#3F6E40` | Sekundäre Links, Erfolg, „Plätze frei“ | 5.6:1 |
-| `--ocker-text` | `#8A5A0B` | Kategorie-Labels, Hinweise | 5.5:1 |
+| `--logo-ocker` | `#F7A600` | Flächen, Linienschwung, Markierungen – **nie Textfarbe** | 1.9:1 |
+| `--logo-rot` | `#C73729` | Flächen, Bereichsfarbe | 4.9:1 |
+| `--logo-gruen` | `#5E9345` | Flächen, Bereichsfarbe – nicht für Fließtext | 3.4:1 |
+| `--accent` | `#C73729` | Primäre Aktion (Buttons, Links), Termine – das Logo-Rot | 4.9:1 · Weiß darauf 5.2:1 |
+| `--accent-hover` | `#A92E22` | Hover/Active | 6.3:1 |
+| `--green-text` | `#3F6E2C` | Grüner Text, „Plätze frei“ | 5.7:1 |
+| `--ocker-text` | `#8A5A00` | Ockerfarbener Text | 5.6:1 |
 
-Regeln: Ocker-Flächen tragen `--ink`-Text (7.2:1). Nicht mehr als eine Akzentfarbe pro Bildschirm dominant. Kein Dark Mode.
+Regeln: Ocker-Flächen tragen `--ink`-Text (7.4:1). Kein Dark Mode.
+
+**Bereichsfarben**: Jeder Bereich trägt eine Logofarbe (`farbe` in `src/data/navigation.js`): Schule und Eltern Grün, Schulleben und Über uns Ocker, Unterstützen, Karriere und Kontakt Rot. Über `data-farbe` setzt sie `--bereich` (Fläche, Seitenkopf-Linie, Aufzählungspunkte, Linie über H2), `--bereich-text` (Pfeile, aktive Navigation) und `--bereich-tint` (Seitenkopf, Hinweise, Kontaktbox; Ink darauf ≥ 11:1). Buttons bleiben im Logo-Rot.
 
 ## 5. Typografie
 

@@ -1,0 +1,69 @@
+/* Aufnahmeverfahren als Weg mit Logo-Linie: vertikal mobil, horizontal ab 1024 px */
+.aufnahme-weg {
+  list-style: none;
+  counter-reset: schritt;
+  display: grid;
+  gap: 0;
+  margin-bottom: 32px;
+}
+
+.aufnahme-weg li {
+  counter-increment: schritt;
+  position: relative;
+  padding: 0 0 28px 56px;
+}
+
+.aufnahme-weg li::before {
+  content: counter(schritt);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  background: var(--paper);
+  border: 3px solid var(--logo-gruen);
+  border-radius: 50%;
+}
+
+.aufnahme-weg li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 40px;
+  bottom: 0;
+  width: 6px;
+  background: var(--logo-gruen);
+}
+
+.aufnahme-weg h3 {
+  font-size: 1.15rem;
+  margin: 6px 0 2px;
+}
+
+.aufnahme-weg p {
+  color: var(--ink-muted);
+}
+
+@media (min-width: 1024px) {
+  .aufnahme-weg:not(.aufnahme-weg-schmal) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .aufnahme-weg:not(.aufnahme-weg-schmal) li {
+    padding: 56px 16px 0 0;
+  }
+
+  .aufnahme-weg:not(.aufnahme-weg-schmal) li:not(:last-child)::after {
+    left: 40px;
+    right: 0;
+    top: 17px;
+    bottom: auto;
+    width: auto;
+    height: 6px;
+  }
+}
+

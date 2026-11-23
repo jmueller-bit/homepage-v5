@@ -1,23 +1,15 @@
 import { Link } from 'react-router-dom';
-import './PageTemplate.css';
-import PageMeta from '../components/PageMeta';
+import PageLayout from '../components/PageLayout';
+import './Rechtliches.css';
 
 function Impressum() {
   return (
-    <div className="page-template">
-      <PageMeta title="Impressum" description="Impressum des Astrid Lindgren Zentrums – Verein für Pädagogik und Kultur, ZVR 960385266." />
-      <section className="page-hero">
-        <div className="container">
-          <h1>Impressum</h1>
-          <p className="hero-subtitle">Rechtliche Informationen gemäß österreichischem Recht</p>
-        </div>
-      </section>
-
-      <section className="page-content section">
-        <div className="container">
-          <div className="content-grid">
-            <div className="main-content glass">
-              <div className="legal-content">
+    <PageLayout
+      title="Impressum"
+      lead="Rechtliche Informationen gemäß österreichischem Recht."
+      description="Impressum des Astrid Lindgren Zentrums – Verein für Pädagogik und Kultur, ZVR 960385266."
+    >
+      <div className="legal-content">
                 <h2>Angaben gemäß §5 E-Commerce Gesetz, §14 Unternehmensgesetzbuch, §63 Gewerbeordnung und §25 Mediengesetz</h2>
                 
                 <div className="legal-section">
@@ -27,7 +19,7 @@ function Impressum() {
                   <p>1230 Wien</p>
                   <p>Österreich</p>
                   
-                  <div className="contact-details" style={{marginTop: '20px'}}>
+                  <div className="contact-details">
                     <p><strong>Telefon:</strong> <a href="tel:+4318874053">+43 1 887 40 53</a></p>
                     <p><strong>Fax:</strong> +43 1 887 40 53</p>
                     <p><strong>E-Mail:</strong> <a href="mailto:office@astrid-lindgren-zentrum.at">office@astrid-lindgren-zentrum.at</a></p>
@@ -71,20 +63,8 @@ function Impressum() {
                   <h3>Datenschutz</h3>
                   <p>Informationen zum Datenschutz finden Sie auf unserer <Link to="/datenschutz">Datenschutzerklärung</Link>.</p>
                 </div>
-              </div>
-            </div>
-
-            <div className="sidebar">
-              <div className="sidebar-menu glass">
-                <h4>Rechtliches</h4>
-                <Link to="/impressum" className="sidebar-link active">Impressum</Link>
-                <Link to="/datenschutz" className="sidebar-link">Datenschutz</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </PageLayout>
   );
 }
 

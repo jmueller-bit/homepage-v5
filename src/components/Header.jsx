@@ -1,158 +1,54 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { NAV } from '../data/navigation';
 import './Header.css';
 
-const navItems = [
-  { path: '/schule', label: 'Unsere Schule', hasDropdown: true },
-  { path: '/eltern', label: 'Für Eltern', hasDropdown: true },
-  { path: '/schulleben', label: 'Schulleben', hasDropdown: true },
-  { path: '/ueber-uns', label: 'Über uns', hasDropdown: true },
-  { path: '/unterstuetzen', label: 'Unterstützen', hasDropdown: true },
-  { path: '/karriere', label: 'Karriere', hasDropdown: true },
-  { path: '/kontakt', label: 'Kontakt', hasDropdown: false },
-];
-
-const schoolDropdown = [
-  { path: '/schule/paedagogik', label: 'Pädagogisches Konzept' },
-  { path: '/schule/schulstufen', label: 'Schulstufen' },
-  { path: '/schule/tagesablauf', label: 'Tagesablauf' },
-  { path: '/schule/raeume', label: 'Räumlichkeiten' },
-  { path: '/schule/downloads', label: 'Downloads' },
-];
-
-const elternDropdown = [
-  { path: '/eltern/interessiert', label: 'Interessiert?' },
-  { path: '/eltern/anmeldung', label: 'Anmeldung & Kosten' },
-  { path: '/eltern/services', label: 'Eltern-Services' },
-  { path: '/eltern/mitwirkung', label: 'Elternmitwirkung' },
-  { path: '/eltern/organisatorisches', label: 'Organisatorisches' },
-  { path: '/eltern/rechtliches', label: 'Rechtliches' },
-];
-
-const schullebenDropdown = [
-  { path: '/schulleben/news', label: 'Aktuelles & News' },
-  { path: '/schulleben/projekte', label: 'Projekte & Aktivitäten' },
-  { path: '/schulleben/galerie', label: 'Galerie' },
-  { path: '/schulleben/veranstaltungen', label: 'Veranstaltungen' },
-  { path: '/schulleben/erfolge', label: 'Erfolgsgeschichten' },
-];
-
-const ueberUnsDropdown = [
-  { path: '/ueber-uns/vision', label: 'Unsere Vision' },
-  { path: '/ueber-uns/team', label: 'Unser Team' },
-  { path: '/ueber-uns/qualitaet', label: 'Qualität & Auszeichnungen' },
-  { path: '/ueber-uns/netzwerk', label: 'Netzwerk & Partner' },
-];
-
-const unterstuetzenDropdown = [
-  { path: '/unterstuetzen/warum', label: 'Warum unterstützen?' },
-  { path: '/unterstuetzen/spenden', label: 'Spenden' },
-  { path: '/unterstuetzen/verein', label: 'Verein "Freunde des ALZ"' },
-  { path: '/unterstuetzen/sachspenden', label: 'Sachspenden & Volunteering' },
-  { path: '/unterstuetzen/sponsoring', label: 'Unternehmen & Sponsoring' },
-];
-
-const karriereDropdown = [
-  { path: '/karriere/arbeiten', label: 'Arbeiten im ALZ' },
-  { path: '/karriere/stellen', label: 'Offene Stellen' },
-  { path: '/karriere/praktikum', label: 'Praktikum & Hospitanz' },
-  { path: '/karriere/initiativ', label: 'Initiativbewerbung' },
-];
-
-const dropdowns = {
-  '/schule': schoolDropdown,
-  '/eltern': elternDropdown,
-  '/schulleben': schullebenDropdown,
-  '/ueber-uns': ueberUnsDropdown,
-  '/unterstuetzen': unterstuetzenDropdown,
-  '/karriere': karriereDropdown,
-};
-
 function Header() {
-  const [activeDropdown, setActiveDropdown] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleMouseEnter = (path) => {
-    if (dropdowns[path]) {
-      setActiveDropdown(path);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setActiveDropdown(null);
-  };
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-  };
-
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-  };
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
 
   return (
-    <header className="header glass-dark">
+    <header className="header">
       <div className="header-container">
-        <Link to="/" className="logo" onClick={closeMobileMenu}>
-          <img 
-            src="/images/logos/alz-logo.svg" 
-            alt="ALZ Logo" 
-            className="logo-icon"
-            width="40"
-            height="36"
-          />
-          <div className="logo-text">
-            <span className="logo-main">Astrid Lindgren</span>
-            <span className="logo-sub">Zentrum</span>
-          </div>
+        <Link to="/" className="logo" onClick={close}>
+          {/* Original-Logo der Live-Seite, weißer Hintergrund freigestellt */}
+          <img src="/images/logos/alz-logo-wortmarke.png" alt="Astrid Lindgren Zentrum – Startseite" className="logo-bild" width="223" height="160" />
         </Link>
 
         <button
+          type="button"
           className="mobile-toggle"
-          onClick={toggleMobileMenu}
-          aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
-          aria-expanded={mobileMenuOpen}
+          onClick={() => setOpen(!open)}
+          aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
+          aria-expanded={open}
+          aria-controls="hauptnavigation"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span /><span /><span />
         </button>
 
-        <nav className={`nav ${mobileMenuOpen ? 'nav-open' : ''}`}>
-          {navItems.map((item) => (
-            <div
-              key={item.path}
-              className="nav-item"
-              onMouseEnter={() => handleMouseEnter(item.path)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <NavLink
-                to={item.path}
-                className={({ isActive }) => 
-                  `nav-link ${isActive ? 'active' : ''}`
-                }
-                onClick={closeMobileMenu}
-              >
-                {item.label}
-                {item.hasDropdown && <span className="dropdown-arrow" aria-hidden="true">▾</span>}
-              </NavLink>
-              
-              {item.hasDropdown && dropdowns[item.path] && (
-                <div className={`dropdown glass ${activeDropdown === item.path ? 'dropdown-active' : ''}`}>
-                  {dropdowns[item.path].map((subItem) => (
-                    <NavLink
-                      key={subItem.path}
-                      to={subItem.path}
-                      className={({ isActive }) => `dropdown-link ${isActive ? 'active' : ''}`}
-                      onClick={closeMobileMenu}
-                    >
-                      {subItem.label}
-                    </NavLink>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+        <nav id="hauptnavigation" className={`nav ${open ? 'nav-open' : ''}`} aria-label="Hauptnavigation">
+          <ul className="nav-liste">
+            {NAV.map((item) => {
+              const sub = item.children.length > 1 ? item.children : null;
+              return (
+                <li key={item.path} className={`nav-item ${sub ? 'hat-sub' : ''}`}>
+                  <NavLink to={item.path} className="nav-link" onClick={close}>
+                    {item.label}
+                    {sub && <span className="dropdown-arrow" aria-hidden="true" />}
+                  </NavLink>
+                  {sub && (
+                    <ul className="dropdown">
+                      {sub.map((s) => (
+                        <li key={s.path}>
+                          <NavLink to={s.path} end className="dropdown-link" onClick={close}>{s.label}</NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
         </nav>
       </div>
     </header>

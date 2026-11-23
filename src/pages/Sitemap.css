@@ -1,0 +1,24 @@
+.sitemap-raster {
+  display: grid;
+  gap: 32px 48px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.sitemap-raster h2 {
+  font-size: 1.25rem;
+  margin: 0 0 8px;
+}
+
+.sitemap-raster ul {
+  list-style: none;
+}
+
+.sitemap-raster li + li {
+  margin-top: 0;
+}
+
+.sitemap-raster a {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+}

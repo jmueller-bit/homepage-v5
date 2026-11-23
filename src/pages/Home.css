@@ -146,6 +146,12 @@
   .portrait-grid { grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
 }
 
+.portrait-bild figcaption {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+}
+
 .portrait-bild img {
   display: block;
   width: 100%;
@@ -199,74 +205,6 @@
   background: var(--paper-deep);
 }
 
-.aufnahme-weg {
-  list-style: none;
-  counter-reset: schritt;
-  display: grid;
-  gap: 0;
-  margin-bottom: 32px;
-}
-
-.aufnahme-weg li {
-  counter-increment: schritt;
-  position: relative;
-  padding: 0 0 28px 56px;
-}
-
-.aufnahme-weg li::before {
-  content: counter(schritt);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  background: var(--paper);
-  border: 3px solid var(--logo-gruen);
-  border-radius: 50%;
-}
-
-.aufnahme-weg li:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: 18px;
-  top: 40px;
-  bottom: 0;
-  width: 6px;
-  background: var(--logo-gruen);
-}
-
-.aufnahme-weg h3 {
-  font-size: 1.15rem;
-  margin: 6px 0 2px;
-}
-
-.aufnahme-weg p {
-  color: var(--ink-muted);
-}
-
-@media (min-width: 1024px) {
-  .aufnahme-weg {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .aufnahme-weg li {
-    padding: 56px 16px 0 0;
-  }
-
-  .aufnahme-weg li:not(:last-child)::after {
-    left: 40px;
-    right: 0;
-    top: 17px;
-    bottom: auto;
-    width: auto;
-    height: 6px;
-  }
-}
-
 .aufnahme-links {
   display: flex;
   flex-wrap: wrap;
@@ -275,6 +213,25 @@
 }
 
 /* Einblicke */
+.einblicke-bilder {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .einblicke-bilder { grid-template-columns: 1.3fr 1fr 1fr; }
+}
+
+.einblicke-bilder img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
 .stimmen-grid {
   display: grid;
   gap: 40px;
@@ -340,13 +297,6 @@
   color: var(--ink-muted);
 }
 
-.netzwerke-liste {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 32px;
-  color: var(--ink-muted);
-}
 
 /* Mobil: Termin in den ersten Sichtbereich; Anrufen übernimmt die Daumenleiste */
 @media (max-width: 767px) {

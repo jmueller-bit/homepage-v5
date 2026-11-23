@@ -1,41 +1,36 @@
 import { Link } from 'react-router-dom';
+import { NAV, RECHTLICHES } from '../data/navigation';
+import { KONTAKT } from '../data/kontakt';
 import './Footer.css';
 
 function Footer() {
   return (
-    <footer className="footer glass-dark">
+    <footer className="footer">
       <div className="footer-container">
         <div className="footer-grid">
           <div className="footer-col">
-            <div className="footer-logo">
-              <span className="logo-main">Astrid Lindgren</span>
-              <span className="logo-sub">Zentrum</span>
-            </div>
-            <p className="footer-tagline">Zentrum für ganzheitliches Lernen</p>
+            <img src="/images/logos/alz-logo-wortmarke.png" alt="Astrid Lindgren Zentrum" className="footer-logo" width="223" height="160" loading="lazy" />
             <p className="footer-desc">
-              Eine reformpädagogische Schule mit Öffentlichkeitsrecht für Kinder von 6-15 Jahren.
+              Schule für ganzheitliches Lernen mit Öffentlichkeitsrecht, 1. bis 9. Schulstufe.
             </p>
           </div>
 
-          <div className="footer-col">
-            <h2>Quick Links</h2>
-            <Link to="/schule">Unsere Schule</Link>
-            <Link to="/eltern/interessiert">Für Eltern</Link>
-            <Link to="/kontakt">Kontakt</Link>
-            <Link to="/anfrage">Schnuppertag</Link>
-          </div>
+          <nav className="footer-col" aria-label="Bereiche">
+            <h2>Bereiche</h2>
+            {NAV.filter((n) => n.path !== '/kontakt').map((n) => (
+              <Link key={n.path} to={n.path}>{n.label}</Link>
+            ))}
+          </nav>
 
           <div className="footer-col">
             <h2>Kontakt</h2>
-            <p>Astrid Lindgren Zentrum</p>
-            <p>Breitenfurter Straße 401-413/1/R02</p>
-            <p>1230 Wien</p>
-            <p className="contact-link">
-              <a href="tel:+4318874053">+43 1 887 40 53</a>
-            </p>
-            <p className="contact-link">
-              <a href="mailto:office@astrid-lindgren-zentrum.at">office@astrid-lindgren-zentrum.at</a>
-            </p>
+            <address>
+              Astrid Lindgren Zentrum<br />
+              {KONTAKT.adresse[0]}<br />
+              {KONTAKT.adresse[1]}
+            </address>
+            <p className="contact-link"><a href={KONTAKT.telHref}>{KONTAKT.telefon}</a></p>
+            <p className="contact-link"><a href={`mailto:${KONTAKT.email}`}>{KONTAKT.email}</a></p>
           </div>
 
           <div className="footer-col">
@@ -63,11 +58,9 @@ function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Astrid Lindgren Zentrum. Alle Rechte vorbehalten.</p>
+          <p>&copy; {new Date().getFullYear()} Astrid Lindgren Zentrum. Verein für Pädagogik und Kultur, ZVR {KONTAKT.zvr}</p>
           <div className="footer-links">
-            <Link to="/impressum">Impressum</Link>
-            <Link to="/datenschutz">Datenschutzerklärung</Link>
-            <Link to="/sitemap">Sitemap</Link>
+            {RECHTLICHES.map((r) => <Link key={r.path} to={r.path}>{r.label}</Link>)}
           </div>
         </div>
       </div>

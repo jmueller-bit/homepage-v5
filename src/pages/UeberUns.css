@@ -1,0 +1,14 @@
+.werte {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.werte li {
+  margin: 0;
+  padding: 6px 14px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+}

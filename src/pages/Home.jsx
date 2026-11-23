@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import { getNaechsterTermin, formatTerminDatum, istHeute } from '../data/termine';
 import { KONTAKT } from '../data/kontakt';
+import { NETZWERKE, DOWNLOADS } from '../data/inhalte';
 import './Home.css';
+import AufnahmeWeg from '../components/AufnahmeWeg';
+import Foto from '../components/Foto';
+import LogoListe from '../components/LogoListe';
+import { ALBEN, FAMILIENWORKSHOP } from '../data/bilder';
 import PageMeta from '../components/PageMeta';
 
 // Alle Inhalte: docs/analyse/inhalte/ (Live-Seite), nichts erfunden
@@ -13,24 +18,11 @@ const PORTRAIT = [
   'Projektarbeit mit Realitätsbezug',
 ];
 
-const AUFNAHME = [
-  { titel: 'Erstkontakt', text: 'Infoabend, Tag der offenen Tür, Anruf oder E-Mail' },
-  { titel: 'Persönliches Gespräch', text: 'mit Eltern und Kind' },
-  { titel: 'Hospitation der Eltern', text: 'einen Vormittag, 7:45–13:45' },
-  { titel: 'Hospitation des Kindes', text: 'eine ganze Woche, Mo–Fr 8–13:30' },
-  { titel: 'Abschlussgespräch', text: 'mit Schulleitung und Vorstand' },
-  { titel: 'Vertragsunterzeichnung', text: '' },
-];
 
 
-const NETZWERKE = [
-  'Verband der europäischen Astrid Lindgren Schulen',
-  'Schule der Zukunft (Gerald Hüther)',
-  'Klimabündnis Schule',
-  'Ökolog Schule',
-  'Wiener Netzwerk Gesundheitsfördernde Schulen',
-  'Netzwerk freier Schulen',
-];
+
+const finde = (id) => ALBEN.flatMap((a) => a.bilder).find((b) => b.src.endsWith(id));
+const EINBLICKE = ['exkursion-03', 'tdot-16', 'exkursion-10'].map(finde);
 
 function TerminKarte({ id }) {
   const termin = getNaechsterTermin();
@@ -96,23 +88,8 @@ function Home() {
       <section className="section home-portrait">
         <div className="container portrait-grid">
           <figure className="portrait-bild">
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="/images/opt/hej-640.webp 640w, /images/opt/hej-1024.webp 1024w, /images/opt/hej-1600.webp 1600w"
-                sizes="(min-width: 1024px) 560px, 100vw"
-              />
-              <img
-                src="/images/opt/hej-1024.jpg"
-                srcSet="/images/opt/hej-640.jpg 640w, /images/opt/hej-1024.jpg 1024w, /images/opt/hej-1600.jpg 1600w"
-                sizes="(min-width: 1024px) 560px, 100vw"
-                alt="Jahresbroschüre „HEJ! 2022/23“ des Astrid Lindgren Zentrums auf einem Holztisch"
-                width="1600"
-                height="1066"
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
+            <Foto bild={FAMILIENWORKSHOP} sizes="(min-width: 1024px) 560px, 100vw" />
+            <figcaption>Familienworkshop im November 2023</figcaption>
           </figure>
           <div>
             <h2 className="schwung">Wer wir sind</h2>
@@ -135,17 +112,10 @@ function Home() {
             Damit Sie und Ihr Kind unser Konzept gut kennenlernen, gibt es ein
             Schritt-für-Schritt-Aufnahmeverfahren.
           </p>
-          <ol className="aufnahme-weg">
-            {AUFNAHME.map((s) => (
-              <li key={s.titel}>
-                <h3>{s.titel}</h3>
-                {s.text && <p>{s.text}</p>}
-              </li>
-            ))}
-          </ol>
+          <AufnahmeWeg />
           <div className="aufnahme-links">
             <Link to="/eltern/anmeldung" className="btn btn-primary">Anmeldung &amp; Kosten</Link>
-            <a href={KONTAKT.kostenPdf} className="pfeil-link" target="_blank" rel="noopener noreferrer">
+            <a href={DOWNLOADS.kosten.href} className="pfeil-link" target="_blank" rel="noopener noreferrer">
               Kosten &amp; Details 2026/27 (PDF)
             </a>
           </div>
@@ -153,14 +123,22 @@ function Home() {
       </section>
 
       <section className="section home-stimmen">
+        <div className="container">
+          <div className="einblicke-bilder">
+            {EINBLICKE.map((b) => (
+              <Foto key={b.src} bild={b} sizes="(min-width: 768px) 33vw, 100vw" />
+            ))}
+          </div>
+        </div>
         <div className="container stimmen-grid">
           <div>
             <h2 className="schwung">Einblicke</h2>
             <p>
-              Eltern, Lehrer*innen und die Gründerin erzählen in Video-Interviews vom Schulalltag,
+              Eltern und die Schulleitung erzählen in Video-Interviews vom Schulalltag,
               von Demokratie, Noten und Freude am Lernen.
             </p>
-            <Link to="/ueber-uns" className="pfeil-link">Zu den Video-Interviews</Link>
+            <Link to="/ueber-uns" className="pfeil-link">Zu den Video-Interviews</Link>{' '}
+            <Link to="/galerie" className="pfeil-link">Zur Galerie</Link>
           </div>
           <div className="auszeichnung">
             <p className="auszeichnung-text">Jutta Höbartner ist Wiener Heldin 2025</p>
@@ -196,9 +174,7 @@ function Home() {
       <section className="section home-netzwerke">
         <div className="container">
           <h2 className="netzwerke-titel">Wir sind Teil von</h2>
-          <ul className="netzwerke-liste">
-            {NETZWERKE.map((n) => <li key={n}>{n}</li>)}
-          </ul>
+          <LogoListe eintraege={NETZWERKE} klein />
           <p className="gesucht-zeile">
             Wir suchen Verstärkung: Lehrkraft für Mathematik/Naturwissenschaften, Zivildiener ab
             September 2027 und Praktikant*innen. <Link to="/karriere">Zu Karriere</Link>

@@ -47,10 +47,6 @@ const richTextToPlainText = (richText) => {
   return richText.content.map(extractText).join('\n\n')
 }
 
-// Helper function to return rich text object directly
-const getRichText = (richText) => {
-  return richText || null
-}
 
 // News Articles
 export const getNewsArticles = async (limit = 10, skip = 0) => {

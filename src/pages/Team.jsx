@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { getTeamMembers } from '../services/contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import './PageTemplate.css';
 import './Team.css';
-import PageMeta from '../components/PageMeta';
+import PageLayout from '../components/PageLayout';
+import { TEAM } from '../data/bilder';
 
 function Team() {
   const [team, setTeam] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedMember, setSelectedMember] = useState(null);
 
@@ -17,10 +15,8 @@ function Team() {
       try {
         const members = await getTeamMembers();
         setTeam(members);
-        setLoading(false);
-      } catch (err) {
-        setError('Fehler beim Laden der Team-Mitglieder');
-        setLoading(false);
+      } catch {
+        setError('Das Team konnte nicht geladen werden');
       }
     };
 
@@ -48,6 +44,9 @@ function Team() {
     };
   }, [selectedMember]);
 
+  // Team laut Live-Seite sofort zeigen; Contentful ersetzt es, sobald es Einträge liefert
+  const mitglieder = team.length && !error ? team : TEAM;
+
   const openModal = (member) => {
     setSelectedMember(member);
   };
@@ -56,113 +55,43 @@ function Team() {
     setSelectedMember(null);
   };
 
-  if (loading) {
-    return (
-      <div className="page-template">
-        <PageMeta title="Team" description="Das Team der Astrid Lindgren Schule: Pädagog*innen mit reformpädagogischer Ausbildung und Expert*innen aus verschiedenen Berufen." />
-        <section className="page-hero">
-          <div className="container">
-            <h1>Unser Team</h1>
-            <p className="hero-subtitle">Laden...</p>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="page-template">
-        <PageMeta title="Team" description="Das Team der Astrid Lindgren Schule: Pädagog*innen mit reformpädagogischer Ausbildung und Expert*innen aus verschiedenen Berufen." />
-        <section className="page-hero">
-          <div className="container">
-            <h1>Unser Team</h1>
-            <p className="hero-subtitle error">{error}</p>
-          </div>
-        </section>
-      </div>
-    );
-  }
-
   return (
-    <div className="page-template">
-      <PageMeta title="Team" description="Das Team der Astrid Lindgren Schule: Pädagog*innen mit reformpädagogischer Ausbildung und Expert*innen aus verschiedenen Berufen." />
-      <section className="page-hero">
-        <div className="container">
-          <h1>Unser Team</h1>
-          <p className="hero-subtitle">
-            Pädagog:innen, Geschäftsführung und alle, die das Astrid Lindgren Zentrum ausmachen
-          </p>
-        </div>
-      </section>
+    <PageLayout
+      title="Unser Team"
+      metaTitle="Team"
+      lead="Lehrerinnen und Lehrer, Pädagoginnen und Pädagogen mit reformpädagogischer Ausbildung sowie Expert*innen aus unterschiedlichen Berufsgruppen."
+      description="Das Team der Astrid Lindgren Schule: Pädagog*innen mit reformpädagogischer Ausbildung und Expert*innen aus verschiedenen Berufen."
+    >
+      <p>
+        Wir arbeiten individuell mit einzelnen Schülerinnen und Schülern sowie in Gruppen und
+        unterstützen sie bei Projektarbeiten. So können wir auf die Bedürfnisse jedes Kindes und der
+        jeweiligen Altersgruppe eingehen.
+      </p>
 
-      <section className="page-content section">
-        <div className="container">
-          <div className="content-grid">
-            <div className="main-content glass">
-              <h2>Das Team hinter dem Erfolg</h2>
-              <p>
-                Unser engagiertes Team aus erfahrenen Pädagog:innen und Mitarbeiter:innen 
-                sorgt jeden Tag dafür, dass sich Kinder wohlfühlen und bestmöglich entwickeln können.
-              </p>
+        <ul className="team-grid">
+          {mitglieder.map((member) => (
+            <li key={member.id}>
+              <button type="button" className="team-card" onClick={() => openModal(member)}>
+                <span className="team-photo">
+                  {member.photo ? (
+                    <img src={member.photo.url} alt="" loading="lazy" width="400" height="400" />
+                  ) : member.foto ? (
+                    <picture>
+                      <source type="image/webp" srcSet={`${member.foto}.webp`} />
+                      <img src={`${member.foto}.jpg`} alt="" loading="lazy" width="480" height="480" />
+                    </picture>
+                  ) : null}
+                </span>
+                <span className="team-info">
+                  <span className="team-name">{member.name}</span>
+                  <span className="team-role">{member.role}</span>
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
 
-              {team.length === 0 ? (
-                <div className="info-box">
-                  <p>Derzeit sind keine Team-Mitglieder verfügbar.</p>
-                </div>
-              ) : (
-                <div className="team-section">
-                  <div className="team-grid">
-                    {team.map((member) => (
-                      <div 
-                        key={member.id} 
-                        className="team-card"
-                        onClick={() => openModal(member)}
-                      >
-                        {member.photo && (
-                          <div className="team-photo">
-                            <img 
-                              src={member.photo.url} 
-                              alt={member.name}
-                              loading="lazy"
-                            />
-                          </div>
-                        )}
-                        <div className="team-info">
-                          <h3>{member.name}</h3>
-                          <p className="team-role">{member.role}</p>
-                          {member.bio && (
-                            <p className="team-bio-preview">{member.bio}</p>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className="sidebar">
-              <div className="sidebar-menu glass">
-                <h3>Über uns</h3>
-                <Link to="/ueber-uns" className="sidebar-link">Übersicht</Link>
-                <Link to="/ueber-uns/vision" className="sidebar-link">Unsere Vision</Link>
-                <Link to="/ueber-uns/team" className="sidebar-link active">Unser Team</Link>
-                <Link to="/ueber-uns/qualitaet" className="sidebar-link">Qualität</Link>
-                <Link to="/ueber-uns/netzwerk" className="sidebar-link">Netzwerk</Link>
-              </div>
-
-              <div className="sidebar-cta glass">
-                <h3>Werden Sie Teil des Teams</h3>
-                <p>Wir suchen engagierte Pädagog:innen!</p>
-                <Link to="/karriere" className="btn btn-primary">Karriere</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Modal */}
+      {/* Detailansicht */}
       {selectedMember && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -170,17 +99,17 @@ function Team() {
               ×
             </button>
             
-            {selectedMember.photo && (
+            {(selectedMember.photo || selectedMember.foto) && (
               <div className="modal-image">
-                <img 
-                  src={selectedMember.photo.url} 
+                <img
+                  src={selectedMember.photo ? selectedMember.photo.url : `${selectedMember.foto}.jpg`}
                   alt={selectedMember.name}
                 />
               </div>
             )}
             
             <div className="modal-body">
-              <h2>{selectedMember.name}</h2>
+              <h2>{selectedMember.name}{selectedMember.titel ? `, ${selectedMember.titel}` : ''}</h2>
               <p className="modal-role">{selectedMember.role}</p>
               {selectedMember.bioRichText ? (
                 <div className="modal-bio">
@@ -193,7 +122,7 @@ function Team() {
           </div>
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }
 

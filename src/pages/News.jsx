@@ -8,16 +8,13 @@ import PageMeta from '../components/PageMeta';
 function News() {
   const { articles, loading, error, pagination, loadMore, refresh } = useNewsArticles(9)
 
-  if (error) {
-    return <NewsError message={error} onRetry={refresh} />
-  }
 
   return (
-    <div className="news-page">
+    <div className="news-page" data-farbe="ocker">
       <PageMeta title="Aktuelles" description="Neuigkeiten aus der Astrid Lindgren Schule in Wien-Liesing." />
       <section className="news-hero">
         <div className="container">
-          <h1>Aktuelles & News</h1>
+          <h1>Aktuelles</h1>
           <p className="hero-subtitle">
             Bleiben Sie auf dem Laufenden über Neuigkeiten aus unserem Schulalltag
           </p>
@@ -26,15 +23,14 @@ function News() {
 
       <section className="news-content section">
         <div className="container">
-          {loading && articles.length === 0 ? (
+          {error ? (
+            <NewsError onRetry={refresh} />
+          ) : loading && articles.length === 0 ? (
             <NewsSkeleton count={9} />
           ) : articles.length === 0 ? (
             <div className="news-empty glass">
-              <h3>Keine News vorhanden</h3>
+              <h2>Keine Neuigkeiten vorhanden</h2>
               <p>Derzeit sind keine News veröffentlicht.</p>
-              <p className="news-empty-hint">
-                Sobald neue Artikel in Contentful veröffentlicht werden, erscheinen sie hier automatisch.
-              </p>
             </div>
           ) : (
             <>
