@@ -1,3 +1,4 @@
+// Fallback, solange in Contentful (Content-Type „termin“) keine Termine gepflegt sind.
 // Quelle: Live-Seite, Startseite „Nächste Info-Termine“ (docs/analyse/inhalte/home.md)
 export const TERMINE = [
   { datum: '2027-01-12', titel: 'Zoom-Info-Abend', zeit: null, ort: 'Online' },

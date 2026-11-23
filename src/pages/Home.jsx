@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { getNaechsterTermin, formatTerminDatum, istHeute } from '../data/termine';
+import { useTermine } from '../hooks/useTermine';
 import { KONTAKT } from '../data/kontakt';
 import { NETZWERKE, DOWNLOADS } from '../data/inhalte';
 import './Home.css';
@@ -24,8 +25,8 @@ const PORTRAIT = [
 const finde = (id) => ALBEN.flatMap((a) => a.bilder).find((b) => b.src.endsWith(id));
 const EINBLICKE = ['exkursion-03', 'tdot-16', 'exkursion-10'].map(finde);
 
-function TerminKarte({ id }) {
-  const termin = getNaechsterTermin();
+function TerminKarte({ id, termine }) {
+  const termin = getNaechsterTermin(new Date(), termine);
 
   if (!termin) {
     return (
@@ -51,6 +52,8 @@ function TerminKarte({ id }) {
 }
 
 function Home() {
+  const termine = useTermine();
+
   return (
     <div className="home">
       <PageMeta description="Reformpädagogische Schule mit Öffentlichkeitsrecht in Wien-Liesing: 1. bis 9. Schulstufe, max. 30 Schüler*innen, altersgemischte Gruppen, Nachmittagsbetreuung bis 16:30." />
@@ -71,7 +74,7 @@ function Home() {
               <Link to="/eltern/anmeldung" className="pfeil-link">Anmeldung &amp; Kosten</Link>
             </div>
           </div>
-          <TerminKarte id="termin-oben" />
+          <TerminKarte id="termin-oben" termine={termine} />
         </div>
       </section>
 
@@ -167,7 +170,7 @@ function Home() {
               <a href={`mailto:${KONTAKT.email}`}>{KONTAKT.email}</a>
             </p>
           </div>
-          <TerminKarte id="termin-unten" />
+          <TerminKarte id="termin-unten" termine={termine} />
         </div>
       </section>
 
