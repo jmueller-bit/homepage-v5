@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getGalleryImages } from '../services/contentful';
 import './Gallery.css';
+import PageMeta from '../components/PageMeta';
 
 function Gallery() {
   const [images, setImages] = useState([]);
@@ -48,6 +49,7 @@ function Gallery() {
   if (loading) {
     return (
       <div className="gallery-page">
+        <PageMeta title="Galerie" description="Bilder aus dem Schulalltag der Astrid Lindgren Schule." />
         <section className="gallery-hero">
           <div className="container">
             <h1>Galerie</h1>
@@ -61,6 +63,7 @@ function Gallery() {
   if (error) {
     return (
       <div className="gallery-page">
+        <PageMeta title="Galerie" description="Bilder aus dem Schulalltag der Astrid Lindgren Schule." />
         <section className="gallery-hero">
           <div className="container">
             <h1>Galerie</h1>
@@ -73,6 +76,7 @@ function Gallery() {
 
   return (
     <div className="gallery-page">
+      <PageMeta title="Galerie" description="Bilder aus dem Schulalltag der Astrid Lindgren Schule." />
       <section className="gallery-hero">
         <div className="container">
           <h1>Galerie</h1>
@@ -86,7 +90,6 @@ function Gallery() {
         <div className="container">
           {images.length === 0 ? (
             <div className="gallery-empty glass">
-              <div className="gallery-empty-icon">📷</div>
               <h3>Keine Bilder vorhanden</h3>
               <p>Derzeit sind keine Bilder in der Galerie verfügbar.</p>
               <p className="gallery-empty-hint">

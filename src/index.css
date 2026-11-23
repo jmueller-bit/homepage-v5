@@ -1,3 +1,16 @@
+/* Metrisch angeglichene Ersatzschriften: verhindern Layout-Sprünge, bis die Webfonts geladen sind (Breiten im Browser gemessen) */
+@font-face {
+  font-family: 'Young Serif Fallback';
+  src: local('Georgia');
+  size-adjust: 113.4%;
+}
+
+@font-face {
+  font-family: 'Atkinson Fallback';
+  src: local('Arial'), local('Helvetica');
+  size-adjust: 99.4%;
+}
+
 /* Tokens: siehe DESIGN.md */
 :root {
   --paper: #FBF7EF;
@@ -13,8 +26,8 @@
   --green-text: #3F6E40;
   --ocker-text: #8A5A0B;
 
-  --font-heading: 'Young Serif', Georgia, serif;
-  --font-body: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --font-heading: 'Young Serif', 'Young Serif Fallback', Georgia, serif;
+  --font-body: 'Atkinson Hyperlegible Next', 'Atkinson Fallback', system-ui, sans-serif;
 
   --radius-sm: 4px;
   --radius: 8px;
@@ -129,29 +142,6 @@ body {
   outline-offset: 2px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.fade-in {
-  animation: fadeIn 0.6s ease forwards;
-}
-
-.floating {
-  animation: float 3s ease-in-out infinite;
-}
-
 .section {
   padding: 80px 0;
 }
@@ -186,5 +176,96 @@ a:hover {
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* Mobil & Touch (Checkliste Schritt 4) */
+.content-grid > *,
+main {
+  min-width: 0;
+}
+
+main {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Eigenständige Kontakt-Links sind Tippziele, keine Fließtext-Links */
+a[href^="tel:"],
+a[href^="mailto:"],
+.sidebar-link,
+.nav-link,
+.dropdown-link {
+  min-height: var(--tap);
+}
+
+a[href^="tel:"],
+a[href^="mailto:"] {
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .nav-link,
+  .dropdown-link {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Link mit Pfeil, seitenübergreifend */
+.pfeil-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.pfeil-link::after {
+  content: '→';
+  margin-left: 8px;
+  transition: transform 150ms var(--ease);
+}
+
+.pfeil-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* Navigations- und Karten-Links ohne Unterstreichung; Fließtext-Links bleiben unterstrichen */
+.logo,
+.nav-link,
+.dropdown-link,
+.sidebar-link,
+.footer-col a,
+.footer-links a,
+.social-links a,
+.action-bar a,
+.btn {
+  text-decoration: none;
+}
+
+/* Browser-Oberflächen in der Markenpalette */
+::selection {
+  background: color-mix(in srgb, var(--logo-ocker) 55%, transparent);
+  color: var(--ink);
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+/* Mikro-Interaktionen: kurz, nur transform/opacity, bei reduzierter Bewegung aus */
+.btn:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) {
+  .btn-primary:hover {
+    transform: translateY(-1px);
   }
 }

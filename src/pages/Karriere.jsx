@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/karriere/arbeiten', title: 'Arbeiten im ALZ' },
@@ -11,6 +12,7 @@ const sections = [
 function Karriere() {
   return (
     <div className="page-template">
+      <PageMeta title="Karriere" description="Arbeiten im Astrid Lindgren Zentrum: offene Stellen, Zivildienst und Praktika." />
       <section className="page-hero">
         <div className="container">
           <h1>Karriere</h1>

@@ -12,17 +12,14 @@
 
 @media (min-width: 1024px) {
   .home-hero { padding: 96px 0 72px; }
-  .home-hero-grid { grid-template-columns: 1.6fr 1fr; gap: 72px; align-items: end; }
+  .home-hero-grid { grid-template-columns: 1.6fr 1fr; gap: 72px; align-items: center; }
 }
 
-.home-kicker,
-.termin-label {
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ocker-text);
-  margin-bottom: 12px;
+.termin-name {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-bottom: 4px;
 }
 
 .home-hero h1 {
@@ -69,10 +66,10 @@
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='132' height='14'%3E%3Cpath d='M0 1h132' stroke='%232B2620' stroke-width='1'/%3E%3Cg%3E%3Cpath d='M2 1h18l-9 13z' fill='%23C44536'/%3E%3Cpath d='M24 1h18l-9 13z' fill='%235A8F5A'/%3E%3Cpath d='M46 1h18l-9 13z' fill='%23FBF7EF'/%3E%3Cpath d='M68 1h18l-9 13z' fill='%23C44536'/%3E%3Cpath d='M90 1h18l-9 13z' fill='%235A8F5A'/%3E%3Cpath d='M112 1h18l-9 13z' fill='%23FBF7EF'/%3E%3C/g%3E%3C/svg%3E") no-repeat;
 }
 
-.termin .termin-label { color: var(--ink); }
-
 .termin-titel {
-  font-size: 1.6rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: 8px;
 }
 
@@ -89,47 +86,31 @@
   width: 100%;
 }
 
-/* Fakten */
+.home-plaetze {
+  font-weight: 700;
+  color: var(--green-text);
+  margin: 12px 0 32px;
+}
+
+/* Fakten als ein Satz: die Zahlen tragen, keine Kennzahl-Kacheln */
 .home-fakten {
   border-top: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   background: #fff;
+  padding: 40px 0;
 }
 
-.fakten-liste {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-@media (min-width: 768px) {
-  .fakten-liste { grid-template-columns: repeat(4, 1fr); }
-}
-
-.fakt {
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  padding: 24px 16px;
-  border-left: 1px solid var(--rule);
-}
-
-.fakt:nth-child(odd) { border-left: 0; }
-
-@media (min-width: 768px) {
-  .fakt:nth-child(odd) { border-left: 1px solid var(--rule); }
-  .fakt:first-child { border-left: 0; }
-}
-
-.fakt dd {
+.fakten-satz {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
-  line-height: 1;
-  margin-bottom: 8px;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.35;
+  max-width: 34em;
+  text-wrap: pretty;
 }
 
-.fakt dt {
-  color: var(--ink-muted);
-  font-size: 0.95rem;
+.fakten-satz strong {
+  font-weight: 400;
+  background: linear-gradient(transparent 62%, color-mix(in srgb, var(--logo-ocker) 45%, transparent) 62%);
 }
 
 /* Signatur: Logo-Schwung unter Überschriften */
@@ -153,24 +134,6 @@
 .abschnitt-lead {
   max-width: 40em;
   margin-bottom: 32px;
-}
-
-.pfeil-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--tap);
-  font-weight: 700;
-  text-decoration: underline;
-}
-
-.pfeil-link::after {
-  content: '→';
-  margin-left: 8px;
-  transition: transform 150ms var(--ease);
-}
-
-.pfeil-link:hover::after {
-  transform: translateX(3px);
 }
 
 /* Portrait */
@@ -326,8 +289,9 @@
 }
 
 .auszeichnung {
-  border-left: 6px solid var(--logo-rot);
-  padding: 8px 0 8px 24px;
+  padding: 24px;
+  background: var(--paper-deep);
+  border-radius: var(--radius);
 }
 
 .auszeichnung-text {
@@ -336,39 +300,30 @@
   line-height: 1.25;
 }
 
-/* Wir suchen */
-.home-gesucht {
-  padding-top: 0;
+/* Abschluss */
+.home-abschluss {
+  background: var(--paper-deep);
 }
 
-.gesucht-liste {
-  list-style: none;
+.abschluss-grid {
   display: grid;
-  gap: 12px;
+  gap: 32px;
 }
 
-@media (min-width: 768px) {
-  .gesucht-liste { grid-template-columns: repeat(3, 1fr); }
+@media (min-width: 1024px) {
+  .abschluss-grid { grid-template-columns: 1.4fr 1fr; gap: 72px; align-items: center; }
 }
 
-.gesucht-liste a {
+.abschluss-grid p {
+  max-width: 36em;
+}
+
+.abschluss-kontakt {
   display: flex;
-  align-items: center;
-  min-height: 72px;
-  height: 100%;
-  padding: 16px 20px;
-  background: #fff;
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  color: var(--ink);
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin-top: 16px;
   font-weight: 700;
-  text-decoration: none;
-  transition: border-color 150ms var(--ease);
-}
-
-.gesucht-liste a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 /* Netzwerke */
@@ -397,6 +352,26 @@
 @media (max-width: 767px) {
   .home-hero { padding-top: 32px; }
   .home-lead { font-size: 1.05rem; margin-bottom: 0; }
+  .home-plaetze { margin-bottom: 0; }
   .home-hero-actions { display: none; }
   .home-hero-grid { gap: 24px; }
+}
+
+.gesucht-zeile {
+  margin-top: 32px;
+  color: var(--ink-muted);
+  max-width: 48em;
+}
+
+/* Ein bewusster Moment: die Wimpelkette weht einmal beim Laden ein */
+@media (prefers-reduced-motion: no-preference) {
+  .termin::before {
+    transform-origin: left top;
+    animation: wimpel 700ms cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+
+  @keyframes wimpel {
+    from { transform: scaleX(0.4) rotate(-4deg); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
 }

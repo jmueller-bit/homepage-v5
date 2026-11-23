@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/eltern/interessiert', title: 'Interessiert?' },
@@ -13,6 +14,7 @@ const sections = [
 function ElternAnmeldung() {
   return (
     <div className="page-template">
+      <PageMeta title="Anmeldung" description="Anmeldung an der Astrid Lindgren Schule: Erstkontakt, persönliches Gespräch, Hospitation von Eltern und Kind, Abschlussgespräch und Vertrag." />
       <section className="page-hero">
         <div className="container">
           <h1>Anmeldung</h1>
@@ -41,7 +43,6 @@ function ElternAnmeldung() {
                 marginBottom: '40px'
               }}>
                 <h3 style={{ color: 'var(--dark-gray)', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ fontSize: '1.5rem' }}>⚠️</span>
                   Wichtige Information
                 </h3>
                 <p style={{ lineHeight: '1.7', color: '#555' }}>
@@ -60,7 +61,6 @@ function ElternAnmeldung() {
               <div className="event-cards" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div className="event-card glass" style={{ padding: '25px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '2rem' }}>🚪</span>
                     <h4 style={{ margin: 0, color: 'var(--primary-green)' }}>Tage der offenen Tür</h4>
                   </div>
                   <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
@@ -70,7 +70,6 @@ function ElternAnmeldung() {
 
                 <div className="event-card glass" style={{ padding: '25px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '2rem' }}>ℹ️</span>
                     <h4 style={{ margin: 0, color: 'var(--primary-green)' }}>Info-Nachmittage</h4>
                   </div>
                   <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
@@ -80,7 +79,6 @@ function ElternAnmeldung() {
 
                 <div className="event-card glass" style={{ padding: '25px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '2rem' }}>📅</span>
                     <h4 style={{ margin: 0, color: 'var(--primary-green)' }}>Persönliche Termine</h4>
                   </div>
                   <p style={{ color: '#555', lineHeight: '1.6', margin: 0 }}>
@@ -121,7 +119,7 @@ function ElternAnmeldung() {
               </div>
 
               <div className="back-link" style={{ marginTop: '40px', textAlign: 'center' }}>
-                <Link to="/eltern" style={{ color: '#666', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <Link to="/eltern" style={{ color: 'var(--ink-muted)', display: 'inline-flex', alignItems: 'center', gap: '8px', minHeight: 'var(--tap)' }}>
                   ← Zurück zur Eltern-Übersicht
                 </Link>
               </div>

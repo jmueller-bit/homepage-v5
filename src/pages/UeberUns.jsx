@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/ueber-uns/vision', title: 'Unsere Vision' },
@@ -11,6 +12,7 @@ const sections = [
 function UeberUns() {
   return (
     <div className="page-template">
+      <PageMeta title="Über uns" description="Das Astrid Lindgren Zentrum: 2003 gegründeter gemeinnütziger Verein für Pädagogik und Kultur in Wien, mit Philosophie, Team und Netzwerken." />
       <section className="page-hero">
         <div className="container">
           <h1>Über uns</h1>

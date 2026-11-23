@@ -8,3 +8,8 @@ main {
   flex: 1;
   padding-top: 80px;
 }
+
+/* Platzhalter beim Nachladen einer Unterseite: hält den Footer unten */
+.page-loading {
+  min-height: 100vh;
+}

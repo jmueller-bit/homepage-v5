@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { getStellenAngebote } from '../services/contentful';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 function Initiativbewerbung() {
   return <Navigate to="/kontakt" replace />;
@@ -32,6 +33,7 @@ function Stellen() {
 
   return (
     <div className="page-template">
+      <PageMeta title="Offene Stellen" description="Offene Stellen an der Astrid Lindgren Schule in Wien-Liesing." />
       <section className="page-hero">
         <div className="container">
           <h1>Offene Stellen</h1>

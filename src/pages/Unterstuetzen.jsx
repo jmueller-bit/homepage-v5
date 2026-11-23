@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/unterstuetzen/warum', title: 'Warum unterstützen?' },
@@ -12,6 +13,7 @@ const sections = [
 function Unterstuetzen() {
   return (
     <div className="page-template">
+      <PageMeta title="Unterstützen" description="Das Astrid Lindgren Zentrum ist spendenbegünstigt: Spenden, Patenschaft für einen Schulplatz, fördernde Mitgliedschaft und Sponsoring." />
       <section className="page-hero">
         <div className="container">
           <h1>Unterstützen</h1>

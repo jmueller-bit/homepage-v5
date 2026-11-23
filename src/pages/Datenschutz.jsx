@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 function Datenschutz() {
   return (
     <div className="page-template">
+      <PageMeta title="Datenschutzerklärung" description="Datenschutzerklärung des Astrid Lindgren Zentrums." />
       <section className="page-hero">
         <div className="container">
           <h1>Datenschutzerklärung</h1>

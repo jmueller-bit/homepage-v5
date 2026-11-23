@@ -46,7 +46,6 @@ function NewsDetail() {
       <div className="news-detail-page">
         <div className="container">
           <div className="news-empty glass">
-            <div className="news-empty-icon">🔍</div>
             <h3>Artikel nicht gefunden</h3>
             <p>Der angeforderte Artikel existiert nicht oder wurde entfernt.</p>
           </div>

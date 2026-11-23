@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/eltern/interessiert', title: 'Interessiert?' },
@@ -13,6 +14,7 @@ const sections = [
 function FuersEltern() {
   return (
     <div className="page-template">
+      <PageMeta title="Für Eltern" description="Informationen für Eltern: Anmeldung, Aufnahmeverfahren, Services und Organisatorisches an der Astrid Lindgren Schule in Wien-Liesing." />
       <section className="page-hero">
         <div className="container">
           <h1>Für Eltern</h1>

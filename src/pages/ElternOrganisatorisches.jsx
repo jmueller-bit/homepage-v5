@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/eltern/interessiert', title: 'Interessiert?' },
@@ -13,6 +14,7 @@ const sections = [
 function ElternOrganisatorisches() {
   return (
     <div className="page-template">
+      <PageMeta title="Organisatorisches" description="Organisatorisches für Eltern: Nachmittagsbetreuung bis 16:30, frisch gekochtes Mittagessen, Kontakt und Kostenübersicht." />
       <section className="page-hero">
         <div className="container">
           <h1>Organisatorisches</h1>
@@ -32,7 +34,7 @@ function ElternOrganisatorisches() {
 
               <div className="info-sections" style={{ marginTop: '30px' }}>
                 <div className="info-block" style={{ marginBottom: '30px' }}>
-                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>📋 Dokumente & Formulare</h3>
+                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>Dokumente & Formulare</h3>
                   <p style={{ marginBottom: '20px' }}>
                     Alle wichtigen Formulare und organisatorischen Dokumente finden Sie in unserer Dokumentenbibliothek:
                   </p>
@@ -42,7 +44,7 @@ function ElternOrganisatorisches() {
                 </div>
 
                 <div className="info-block" style={{ marginBottom: '30px' }}>
-                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>🕐 Schulzeiten</h3>
+                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>Schulzeiten</h3>
                   <p style={{ lineHeight: '1.6', color: '#555' }}>
                     Nachmittagsbetreuung bis 16:30 Uhr. Die genauen Unterrichtszeiten stehen in der{' '}
                     <a href="https://www.astrid-lindgren-zentrum.at/wp-content/uploads/2026/10/TEXT_Kostenubersicht_Schule_v2026-2027.pdf" target="_blank" rel="noopener noreferrer">Kostenübersicht 2026/27 (PDF)</a>.
@@ -50,7 +52,7 @@ function ElternOrganisatorisches() {
                 </div>
 
                 <div className="info-block" style={{ marginBottom: '30px' }}>
-                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>🍽️ Verpflegung</h3>
+                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>Verpflegung</h3>
                   <p style={{ lineHeight: '1.6', color: '#555' }}>
                     In unserer Schule wird täglich frisch gekocht. Das Mittagessen ist im Schulgeld 
                     inkludiert. Bei Allergien oder Unverträglichkeiten sprechen Sie uns bitte an.
@@ -58,7 +60,7 @@ function ElternOrganisatorisches() {
                 </div>
 
                 <div className="info-block" style={{ marginBottom: '30px' }}>
-                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>🚌 Anfahrt</h3>
+                  <h3 style={{ color: 'var(--primary-green)', marginBottom: '15px' }}>Anfahrt</h3>
                   <p style={{ lineHeight: '1.6', color: '#555' }}>
                     <strong>Adresse:</strong><br />
                     Astrid Lindgren Zentrum<br />
@@ -77,7 +79,7 @@ function ElternOrganisatorisches() {
                   borderRadius: '8px',
                   borderLeft: '4px solid var(--red)'
                 }}>
-                  <h3 style={{ color: 'var(--red)', marginBottom: '15px' }}>🚨 Notfallkontakte</h3>
+                  <h3 style={{ color: 'var(--red)', marginBottom: '15px' }}>Notfallkontakte</h3>
                   <p style={{ lineHeight: '1.6', color: '#555' }}>
                     <strong>Schulbüro:</strong> <a href="tel:+4318874053">+43 1 887 40 53</a><br />
                     <strong>E-Mail:</strong> <a href="mailto:office@astrid-lindgren-zentrum.at">office@astrid-lindgren-zentrum.at</a><br /><br />

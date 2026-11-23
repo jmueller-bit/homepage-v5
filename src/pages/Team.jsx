@@ -4,6 +4,7 @@ import { getTeamMembers } from '../services/contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import './PageTemplate.css';
 import './Team.css';
+import PageMeta from '../components/PageMeta';
 
 function Team() {
   const [team, setTeam] = useState([]);
@@ -58,6 +59,7 @@ function Team() {
   if (loading) {
     return (
       <div className="page-template">
+        <PageMeta title="Team" description="Das Team der Astrid Lindgren Schule: Pädagog*innen mit reformpädagogischer Ausbildung und Expert*innen aus verschiedenen Berufen." />
         <section className="page-hero">
           <div className="container">
             <h1>Unser Team</h1>
@@ -71,6 +73,7 @@ function Team() {
   if (error) {
     return (
       <div className="page-template">
+        <PageMeta title="Team" description="Das Team der Astrid Lindgren Schule: Pädagog*innen mit reformpädagogischer Ausbildung und Expert*innen aus verschiedenen Berufen." />
         <section className="page-hero">
           <div className="container">
             <h1>Unser Team</h1>
@@ -83,6 +86,7 @@ function Team() {
 
   return (
     <div className="page-template">
+      <PageMeta title="Team" description="Das Team der Astrid Lindgren Schule: Pädagog*innen mit reformpädagogischer Ausbildung und Expert*innen aus verschiedenen Berufen." />
       <section className="page-hero">
         <div className="container">
           <h1>Unser Team</h1>
@@ -140,7 +144,7 @@ function Team() {
 
             <div className="sidebar">
               <div className="sidebar-menu glass">
-                <h4>Über uns</h4>
+                <h3>Über uns</h3>
                 <Link to="/ueber-uns" className="sidebar-link">Übersicht</Link>
                 <Link to="/ueber-uns/vision" className="sidebar-link">Unsere Vision</Link>
                 <Link to="/ueber-uns/team" className="sidebar-link active">Unser Team</Link>
@@ -149,7 +153,7 @@ function Team() {
               </div>
 
               <div className="sidebar-cta glass">
-                <h4>Werden Sie Teil des Teams</h4>
+                <h3>Werden Sie Teil des Teams</h3>
                 <p>Wir suchen engagierte Pädagog:innen!</p>
                 <Link to="/karriere" className="btn btn-primary">Karriere</Link>
               </div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/eltern/interessiert', title: 'Interessiert?' },
@@ -13,6 +14,7 @@ const sections = [
 function ElternServices() {
   return (
     <div className="page-template">
+      <PageMeta title="Eltern-Services" description="Dokumente und Formulare für Eltern der Astrid Lindgren Schule." />
       <section className="page-hero">
         <div className="container">
           <h1>Eltern-Services</h1>
@@ -39,7 +41,7 @@ function ElternServices() {
                   borderLeft: '4px solid var(--primary-green)'
                 }}>
                   <p style={{ margin: 0, color: '#555' }}>
-                    <strong>💡 Hinweis:</strong> Klicken Sie auf eine Datei, um sie anzusehen oder herunterzuladen. 
+                    <strong>Hinweis:</strong> Klicken Sie auf eine Datei, um sie anzusehen oder herunterzuladen. 
                     Mit einem Rechtsklick können Sie Dateien direkt speichern.
                   </p>
                 </div>

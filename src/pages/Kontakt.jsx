@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 function Kontakt() {
   return (
     <div className="page-template">
+      <PageMeta title="Kontakt" description="Astrid Lindgren Zentrum, Breitenfurter Straße 401-413/1/R02, 1230 Wien. Telefon 01 887 40 53, office@astrid-lindgren-zentrum.at." />
       <section className="page-hero">
         <div className="container">
           <h1>Kontakt</h1>
@@ -44,10 +46,10 @@ function Kontakt() {
 
             <div className="sidebar">
               <div className="sidebar-menu glass">
-                <h4>Kontaktmöglichkeiten</h4>
+                <h3>Kontaktmöglichkeiten</h3>
                 
                 <div className="contact-info">
-                  <h5>Adresse</h5>
+                  <h4>Adresse</h4>
                   <p><strong>Astrid Lindgren Zentrum</strong><br/>
                   Breitenfurter Straße 401-413/1/R02<br/>
                   1230 Wien</p>
@@ -57,35 +59,35 @@ function Kontakt() {
                 </div>
 
                 <div className="contact-info">
-                  <h5>Anfahrt</h5>
+                  <h4>Anfahrt</h4>
                   <ul style={{marginLeft: '20px', fontSize: '0.9rem', color: '#555'}}>
                     <li>S-Bahn: Bahnhof Liesing</li>
                     <li>Straßenbahn: Linie 60</li>
                     <li>Bus: 60A, 253, 259, 354</li>
                   </ul>
                   <p style={{marginTop: '10px'}}>
-                    <a href="https://goo.gl/maps/vqLKaruzByQ2" target="_blank" rel="noopener noreferrer">Google Maps →</a>
+                    <a href="https://goo.gl/maps/vqLKaruzByQ2" target="_blank" rel="noopener noreferrer" className="pfeil-link">Route in Google Maps</a>
                   </p>
                 </div>
 
                 <div className="contact-info">
-                  <h5>Telefon & Fax</h5>
+                  <h4>Telefon & Fax</h4>
                   <p><a href="tel:+4318874053">+43 1 887 40 53</a></p>
                 </div>
 
                 <div className="contact-info">
-                  <h5>E-Mail</h5>
+                  <h4>E-Mail</h4>
                   <p><a href="mailto:office@astrid-lindgren-zentrum.at">office@astrid-lindgren-zentrum.at</a></p>
                 </div>
 
                 <div className="contact-info">
-                  <h5>Vereinsregisternummer</h5>
+                  <h4>Vereinsregisternummer</h4>
                   <p>ZVR: 960385266</p>
                 </div>
               </div>
 
               <div className="sidebar-cta glass">
-                <h4>Quick Links</h4>
+                <h3>Quick Links</h3>
                 <Link to="/eltern/interessiert" className="sidebar-link">Interessiert?</Link>
                 <Link to="/karriere" className="sidebar-link">Offene Stellen</Link>
               </div>

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sitemapData = [
   {
@@ -87,6 +88,7 @@ const sitemapData = [
 function Sitemap() {
   return (
     <div className="page-template">
+      <PageMeta title="Sitemap" description="Übersicht aller Seiten der Website des Astrid Lindgren Zentrums." />
       <section className="page-hero">
         <div className="container">
           <h1>Sitemap</h1>
@@ -125,7 +127,7 @@ function Sitemap() {
                       margin: 0 
                     }}>
                       {section.links.map((link, linkIndex) => (
-                        <li key={linkIndex} style={{ marginBottom: '10px' }}>
+                        <li key={linkIndex}>
                           <Link 
                             to={link.path}
                             style={{ 
@@ -134,12 +136,11 @@ function Sitemap() {
                               display: 'flex',
                               alignItems: 'center',
                               gap: '8px',
-                              transition: 'all 0.2s ease',
-                              padding: '5px 0'
+                              minHeight: 'var(--tap)'
                             }}
                             className="sitemap-link"
                           >
-                            <span style={{ color: 'var(--primary-green)' }}>→</span>
+                            <span aria-hidden="true" style={{ color: 'var(--primary-green)' }}>→</span>
                             {link.label}
                           </Link>
                         </li>

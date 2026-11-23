@@ -13,6 +13,8 @@ const toDay = (d) =>
 export const getNaechsterTermin = (heute = new Date(), termine = TERMINE) =>
   termine.find((t) => t.datum >= toDay(heute)) ?? null
 
+export const istHeute = (iso, heute = new Date()) => iso === toDay(heute)
+
 export const formatTerminDatum = (iso) =>
   new Intl.DateTimeFormat('de-AT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
     .format(new Date(`${iso}T12:00:00`))

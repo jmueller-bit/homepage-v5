@@ -1,24 +1,28 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/Home';
-import Schule from './pages/Schule';
-import FuersEltern from './pages/FuersEltern';
-import ElternServices from './pages/ElternServices';
-import ElternOrganisatorisches from './pages/ElternOrganisatorisches';
-import ElternAnmeldung from './pages/ElternAnmeldung';
-import Schulleben from './pages/Schulleben';
-import UeberUns from './pages/UeberUns';
-import Team from './pages/Team';
-import Unterstuetzen from './pages/Unterstuetzen';
-import Karriere from './pages/Karriere';
-import Stellen, { Initiativbewerbung } from './pages/Stellen';
-import Kontakt from './pages/Kontakt';
-import Gallery from './pages/Gallery';
-import Impressum from './pages/Impressum';
-import Datenschutz from './pages/Datenschutz';
-import Sitemap from './pages/Sitemap';
+const Schule = lazy(() => import('./pages/Schule'));
+const FuersEltern = lazy(() => import('./pages/FuersEltern'));
+const ElternServices = lazy(() => import('./pages/ElternServices'));
+const ElternOrganisatorisches = lazy(() => import('./pages/ElternOrganisatorisches'));
+const ElternAnmeldung = lazy(() => import('./pages/ElternAnmeldung'));
+const Schulleben = lazy(() => import('./pages/Schulleben'));
+const UeberUns = lazy(() => import('./pages/UeberUns'));
+const Team = lazy(() => import('./pages/Team'));
+const Unterstuetzen = lazy(() => import('./pages/Unterstuetzen'));
+const Karriere = lazy(() => import('./pages/Karriere'));
+const Stellen = lazy(() => import('./pages/Stellen'));
+const Initiativbewerbung = lazy(() =>
+  import('./pages/Stellen').then((m) => ({ default: m.Initiativbewerbung }))
+);
+const Kontakt = lazy(() => import('./pages/Kontakt'));
+const Gallery = lazy(() => import('./pages/Gallery'));
+const Impressum = lazy(() => import('./pages/Impressum'));
+const Datenschutz = lazy(() => import('./pages/Datenschutz'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
 import Footer from './components/Footer';
 import MobileActionBar from './components/MobileActionBar';
 
@@ -28,6 +32,7 @@ function App() {
       <div className="app">
         <Header />
         <main>
+          <Suspense fallback={<div className="page-loading" />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/schule/*" element={<Schule />} />
@@ -49,6 +54,7 @@ function App() {
             <Route path="/datenschutz" element={<Datenschutz />} />
             <Route path="/sitemap" element={<Sitemap />} />
           </Routes>
+          </Suspense>
         </main>
         <Footer />
         <MobileActionBar />

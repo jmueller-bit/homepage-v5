@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/schule/paedagogik', title: 'Pädagogisches Konzept' },
@@ -29,6 +30,7 @@ const schulstufen = [
 function Schule() {
   return (
     <div className="page-template">
+      <PageMeta title="Unsere Schule" description="Statutenschule mit Öffentlichkeitsrecht, 1. bis 9. Schulstufe, kleine altersgemischte Gruppen, reformpädagogischer und ganzheitlicher Ansatz." />
       <section className="page-hero">
         <div className="container">
           <h1>Unsere Schule</h1>

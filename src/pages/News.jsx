@@ -3,6 +3,7 @@ import NewsCard from '../components/NewsCard'
 import NewsSkeleton from '../components/NewsSkeleton'
 import NewsError from '../components/NewsError'
 import './News.css'
+import PageMeta from '../components/PageMeta';
 
 function News() {
   const { articles, loading, error, pagination, loadMore, refresh } = useNewsArticles(9)
@@ -13,6 +14,7 @@ function News() {
 
   return (
     <div className="news-page">
+      <PageMeta title="Aktuelles" description="Neuigkeiten aus der Astrid Lindgren Schule in Wien-Liesing." />
       <section className="news-hero">
         <div className="container">
           <h1>Aktuelles & News</h1>
@@ -28,7 +30,6 @@ function News() {
             <NewsSkeleton count={9} />
           ) : articles.length === 0 ? (
             <div className="news-empty glass">
-              <div className="news-empty-icon">📰</div>
               <h3>Keine News vorhanden</h3>
               <p>Derzeit sind keine News veröffentlicht.</p>
               <p className="news-empty-hint">

@@ -3,6 +3,7 @@ import News from './News';
 import NewsDetail from './NewsDetail';
 import './PageTemplate.css';
 import './Schulleben.css';
+import PageMeta from '../components/PageMeta';
 
 const sections = [
   { path: '/schulleben/news', title: 'Aktuelles & News' },
@@ -15,6 +16,7 @@ const sections = [
 function SchullebenOverview() {
   return (
     <>
+      <PageMeta title="Schulleben" description="Einblicke in den Alltag der Astrid Lindgren Schule: Neuigkeiten, Projekte und Bilder." />
       <section className="page-hero">
         <div className="container">
           <h1>Schulleben</h1>

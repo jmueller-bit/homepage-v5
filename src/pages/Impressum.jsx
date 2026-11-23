@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import './PageTemplate.css';
+import PageMeta from '../components/PageMeta';
 
 function Impressum() {
   return (
     <div className="page-template">
+      <PageMeta title="Impressum" description="Impressum des Astrid Lindgren Zentrums – Verein für Pädagogik und Kultur, ZVR 960385266." />
       <section className="page-hero">
         <div className="container">
           <h1>Impressum</h1>

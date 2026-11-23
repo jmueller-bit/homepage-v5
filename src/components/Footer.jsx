@@ -18,7 +18,7 @@ function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Quick Links</h4>
+            <h2>Quick Links</h2>
             <Link to="/schule">Unsere Schule</Link>
             <Link to="/eltern/interessiert">Für Eltern</Link>
             <Link to="/kontakt">Kontakt</Link>
@@ -26,7 +26,7 @@ function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Kontakt</h4>
+            <h2>Kontakt</h2>
             <p>Astrid Lindgren Zentrum</p>
             <p>Breitenfurter Straße 401-413/1/R02</p>
             <p>1230 Wien</p>
@@ -39,7 +39,7 @@ function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Betreuung</h4>
+            <h2>Betreuung</h2>
             <p>Nachmittagsbetreuung bis 16:30</p>
             <div className="social-links">
               <a href="https://www.facebook.com/Astrid-Lindgren-Zentrum-f%C3%BCr-ganzheitliches-Lernen-505834649933912" target="_blank" rel="noopener noreferrer" aria-label="Facebook">

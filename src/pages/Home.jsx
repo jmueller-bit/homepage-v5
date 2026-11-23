@@ -1,23 +1,16 @@
 import { Link } from 'react-router-dom';
-import { getNaechsterTermin, formatTerminDatum } from '../data/termine';
+import { getNaechsterTermin, formatTerminDatum, istHeute } from '../data/termine';
 import { KONTAKT } from '../data/kontakt';
 import './Home.css';
+import PageMeta from '../components/PageMeta';
 
 // Alle Inhalte: docs/analyse/inhalte/ (Live-Seite), nichts erfunden
-const FAKTEN = [
-  { wert: '1.–9.', text: 'Schulstufe, Pflichtschule' },
-  { wert: 'max. 30', text: 'Schüler*innen in der ganzen Schule' },
-  { wert: '8–12', text: 'Schüler*innen pro Pädagog*in' },
-  { wert: '16:30', text: 'Nachmittagsbetreuung bis' },
-];
 
 const PORTRAIT = [
-  'Statutenschule mit Öffentlichkeitsrecht',
   'Kleine, altersgemischte Gruppen',
   'Reformpädagogischer, ganzheitlicher Ansatz',
   'Individuelles, selbstbestimmtes Lernen',
   'Projektarbeit mit Realitätsbezug',
-  'Jause und Mittagessen, frisch in der Schule gekocht',
 ];
 
 const AUFNAHME = [
@@ -29,11 +22,6 @@ const AUFNAHME = [
   { titel: 'Vertragsunterzeichnung', text: '' },
 ];
 
-const GESUCHT = [
-  { titel: 'Lehrkraft für Mathematik/Naturwissenschaften', to: '/karriere/stellen' },
-  { titel: 'Zivildiener ab September 2027', to: '/karriere' },
-  { titel: 'Praktikant*innen', to: '/karriere' },
-];
 
 const NETZWERKE = [
   'Verband der europäischen Astrid Lindgren Schulen',
@@ -44,14 +32,13 @@ const NETZWERKE = [
   'Netzwerk freier Schulen',
 ];
 
-function TerminKarte() {
+function TerminKarte({ id }) {
   const termin = getNaechsterTermin();
 
   if (!termin) {
     return (
-      <aside className="termin" aria-labelledby="termin-titel">
-        <p className="termin-label">Kennenlernen</p>
-        <h2 id="termin-titel" className="termin-titel">Termin individuell vereinbaren</h2>
+      <aside className="termin" aria-labelledby={id}>
+        <h2 id={id} className="termin-titel">Termin individuell vereinbaren</h2>
         <p className="termin-meta">Rufen Sie uns an, wir finden gemeinsam einen Termin.</p>
         <a href={KONTAKT.telHref} className="btn btn-primary">{KONTAKT.telefon}</a>
       </aside>
@@ -59,9 +46,9 @@ function TerminKarte() {
   }
 
   return (
-    <aside className="termin" aria-labelledby="termin-titel">
-      <p className="termin-label">Nächster Kennenlern-Termin</p>
-      <h2 id="termin-titel" className="termin-titel">{termin.titel}</h2>
+    <aside className="termin" aria-labelledby={id}>
+      <h2 id={id} className="termin-titel">Nächster Kennenlern-Termin</h2>
+      <p className="termin-name">{istHeute(termin.datum) ? `Heute: ${termin.titel}` : termin.titel}</p>
       <p className="termin-datum">{formatTerminDatum(termin.datum)}</p>
       <p className="termin-meta">
         {[termin.zeit, termin.ort].filter(Boolean).join(' · ')}
@@ -74,50 +61,58 @@ function TerminKarte() {
 function Home() {
   return (
     <div className="home">
+      <PageMeta description="Reformpädagogische Schule mit Öffentlichkeitsrecht in Wien-Liesing: 1. bis 9. Schulstufe, max. 30 Schüler*innen, altersgemischte Gruppen, Nachmittagsbetreuung bis 16:30." />
       <section className="home-hero">
         <div className="container home-hero-grid">
           <div className="home-hero-text">
-            <p className="home-kicker">Wien-Liesing · seit 2003</p>
             <h1>
               Astrid Lindgren Schule
               <span className="home-hero-sub">Zentrum für ganzheitliches Lernen</span>
             </h1>
             <p className="home-lead">
-              Eine kleine Schule mit Öffentlichkeitsrecht von der 1. bis zur 9. Schulstufe.
-              Anmeldungen sind jederzeit möglich – besonders unsere Primaria I freut sich über Zuwachs.
+              Eine kleine Schule in Wien-Liesing, seit 2003 – von der 1. bis zur 9. Schulstufe,
+              mit Öffentlichkeitsrecht: Die Zeugnisse sind staatlich gültig.
             </p>
+            <p className="home-plaetze">Anmeldungen jederzeit möglich – besonders in der Primaria I sind Plätze frei.</p>
             <div className="home-hero-actions">
-              <a href={KONTAKT.telHref} className="btn btn-primary">Anrufen: {KONTAKT.telefon}</a>
-              <Link to="/eltern/anmeldung" className="btn btn-outline">So läuft die Aufnahme</Link>
+              <a href={KONTAKT.telHref} className="btn btn-outline">Anrufen: {KONTAKT.telefon}</a>
+              <Link to="/eltern/anmeldung" className="pfeil-link">Anmeldung &amp; Kosten</Link>
             </div>
           </div>
-          <TerminKarte />
+          <TerminKarte id="termin-oben" />
         </div>
       </section>
 
       <section className="home-fakten" aria-label="Die Schule in Zahlen">
         <div className="container">
-          <dl className="fakten-liste">
-            {FAKTEN.map((f) => (
-              <div key={f.text} className="fakt">
-                <dt>{f.text}</dt>
-                <dd>{f.wert}</dd>
-              </div>
-            ))}
-          </dl>
+          <p className="fakten-satz">
+            Höchstens <strong>30 Kinder</strong> in der ganzen Schule, <strong>8 bis 12</strong> pro
+            Pädagog*in, Jause und Mittagessen <strong>frisch gekocht</strong>, Betreuung
+            bis <strong>16:30</strong>.
+          </p>
         </div>
       </section>
 
       <section className="section home-portrait">
         <div className="container portrait-grid">
           <figure className="portrait-bild">
-            <img
-              src="/images/gallery/ALZ_1410_06-scaled.jpg"
-              alt="Jahresbroschüre „HEJ! 2022/23“ des Astrid Lindgren Zentrums auf einem Holztisch"
-              width="2560"
-              height="1706"
-              loading="lazy"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/images/opt/hej-640.webp 640w, /images/opt/hej-1024.webp 1024w, /images/opt/hej-1600.webp 1600w"
+                sizes="(min-width: 1024px) 560px, 100vw"
+              />
+              <img
+                src="/images/opt/hej-1024.jpg"
+                srcSet="/images/opt/hej-640.jpg 640w, /images/opt/hej-1024.jpg 1024w, /images/opt/hej-1600.jpg 1600w"
+                sizes="(min-width: 1024px) 560px, 100vw"
+                alt="Jahresbroschüre „HEJ! 2022/23“ des Astrid Lindgren Zentrums auf einem Holztisch"
+                width="1600"
+                height="1066"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
           </figure>
           <div>
             <h2 className="schwung">Wer wir sind</h2>
@@ -149,7 +144,7 @@ function Home() {
             ))}
           </ol>
           <div className="aufnahme-links">
-            <Link to="/eltern/anmeldung" className="btn btn-primary">Infos zur Anmeldung</Link>
+            <Link to="/eltern/anmeldung" className="btn btn-primary">Anmeldung &amp; Kosten</Link>
             <a href={KONTAKT.kostenPdf} className="pfeil-link" target="_blank" rel="noopener noreferrer">
               Kosten &amp; Details 2026/27 (PDF)
             </a>
@@ -168,7 +163,6 @@ function Home() {
             <Link to="/ueber-uns" className="pfeil-link">Zu den Video-Interviews</Link>
           </div>
           <div className="auszeichnung">
-            <p className="termin-label">Gratulation</p>
             <p className="auszeichnung-text">Jutta Höbartner ist Wiener Heldin 2025</p>
             <a
               href="https://www.w24.at/Sendungen-A-Z/wienerheldinnen/Alle-Folgen?video=34403"
@@ -182,16 +176,20 @@ function Home() {
         </div>
       </section>
 
-      <section className="section home-gesucht">
-        <div className="container">
-          <h2 className="schwung">Wir suchen</h2>
-          <ul className="gesucht-liste">
-            {GESUCHT.map((g) => (
-              <li key={g.titel}>
-                <Link to={g.to}>{g.titel}</Link>
-              </li>
-            ))}
-          </ul>
+      <section className="section home-abschluss">
+        <div className="container abschluss-grid">
+          <div>
+            <h2 className="schwung">Lernen Sie uns kennen</h2>
+            <p>
+              Am besten erleben Sie unsere Schule selbst. Rufen Sie uns an – wir vereinbaren
+              gerne einen individuellen Termin.
+            </p>
+            <p className="abschluss-kontakt">
+              <a href={KONTAKT.telHref}>{KONTAKT.telefon}</a>
+              <a href={`mailto:${KONTAKT.email}`}>{KONTAKT.email}</a>
+            </p>
+          </div>
+          <TerminKarte id="termin-unten" />
         </div>
       </section>
 
@@ -201,6 +199,10 @@ function Home() {
           <ul className="netzwerke-liste">
             {NETZWERKE.map((n) => <li key={n}>{n}</li>)}
           </ul>
+          <p className="gesucht-zeile">
+            Wir suchen Verstärkung: Lehrkraft für Mathematik/Naturwissenschaften, Zivildiener ab
+            September 2027 und Praktikant*innen. <Link to="/karriere">Zu Karriere</Link>
+          </p>
         </div>
       </section>
     </div>

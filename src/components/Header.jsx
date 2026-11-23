@@ -107,7 +107,12 @@ function Header() {
           </div>
         </Link>
 
-        <button className="mobile-toggle" onClick={toggleMobileMenu}>
+        <button
+          className="mobile-toggle"
+          onClick={toggleMobileMenu}
+          aria-label={mobileMenuOpen ? 'Menü schließen' : 'Menü öffnen'}
+          aria-expanded={mobileMenuOpen}
+        >
           <span></span>
           <span></span>
           <span></span>
@@ -129,7 +134,7 @@ function Header() {
                 onClick={closeMobileMenu}
               >
                 {item.label}
-                {item.hasDropdown && <span className="dropdown-arrow">▾</span>}
+                {item.hasDropdown && <span className="dropdown-arrow" aria-hidden="true">▾</span>}
               </NavLink>
               
               {item.hasDropdown && dropdowns[item.path] && (
