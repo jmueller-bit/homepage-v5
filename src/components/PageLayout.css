@@ -11,7 +11,7 @@
 }
 
 .page-kopf .container { position: relative; z-index: 1; }
-.page-kopf h1 { color: inherit; }
+.page-kopf h1 { color: inherit; font-size: clamp(1.8rem, 4vw, 2.6rem); }
 
 [data-farbe="gruen"] { --kopf: var(--green-text); --kopf-text: #fff; }
 [data-farbe="ocker"] { --kopf: var(--logo-ocker); --kopf-text: var(--ink); }
