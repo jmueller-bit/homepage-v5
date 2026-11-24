@@ -39,6 +39,7 @@
 
   --radius-sm: 4px;
   --radius: 8px;
+  --radius-gross: 24px; /* Fotos und Flächen auf der Startseite: freundlicher, weicher */
   --tap: 48px;
   --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
 
@@ -295,3 +296,12 @@ p, li {
 [data-farbe="gruen"] { --bereich: var(--logo-gruen); --bereich-text: var(--green-text); --bereich-tint: var(--gruen-tint); }
 [data-farbe="ocker"] { --bereich: var(--logo-ocker); --bereich-text: var(--ocker-text); --bereich-tint: var(--ocker-tint); }
 [data-farbe="rot"] { --bereich: var(--logo-rot); --bereich-text: var(--accent); --bereich-tint: var(--rot-tint); }
+
+/* Logolinien als Gestaltungsform (LogoFormen.jsx) */
+.logo-formen {
+  display: block;
+  fill: none;
+  stroke-width: 20;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

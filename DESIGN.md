@@ -30,7 +30,7 @@ Quelle Branchendaten: ui-ux-pro-max (`product`: Educational / Kids Learning → 
 - Kein Raster aus gleich großen Icon-Karten mit 3–4 Spalten als Standardlösung.
 - Keine Stockfotos, keine KI-Bilder, keine Platzhalter. Nur ALZ-Fotos.
 - Keine erfundenen Zahlen, Zeiten oder Zitate.
-- Keine Schatten-Stapel und keine Radien > 12 px.
+- Keine Schatten-Stapel. Große Radien (24 px) nur für Fotos und Karten auf der Startseite.
 
 ## 4. Farben
 
@@ -69,11 +69,21 @@ Skala (rem, Basis 16 px = 1 rem, mobil 17 px): `0.875 · 1 · 1.25 · 1.6 · 2.1
 ## 6. Form & Raum
 
 - Abstände: 4er-Raster `4 · 8 · 12 · 16 · 24 · 32 · 48 · 72 · 112 px`, großzügig („spacious“).
-- Radius: 4 px (Felder), 8 px (Bilder, Karten). Buttons rechteckig mit 4 px.
+- Radius: 4 px (Felder, Buttons), 8 px (Karten auf Unterseiten), 24 px (`--radius-gross`: Fotos, Termin-Karte und Flächen der Startseite).
 - Linien statt Schatten: Abschnitte trennen sich durch `--rule`-Linien oder `--paper-deep`-Flächen.
 - **Signatur-Element: der Logo-Schwung.** Eine 6 px starke Linie in Ocker/Rot/Grün mit runden Ecken, wie im Logo, führt als Unterstreichung von Überschriften, als Zeitleiste im Aufnahmeverfahren und als Wegmarkierung. Sparsam: max. einmal pro Bildschirm.
 - **Wimpelkette** (aus der HEJ!-Broschüre) nur für Termine/Aktuelles.
 - Fotos: echte ALZ-Fotos, leicht abgerundet, nie mit Farbfilter überlagert. Immer `width`/`height` bzw. `aspect-ratio` setzen.
+
+## 6a. Startseite: kräftige Farbflächen
+
+Die Startseite darf lauter sein als die Unterseiten – freundlich und modern, ohne kindisch zu werden (Zielgruppe bleiben Eltern):
+
+- **Abschnitte als volle Farbflächen**: Hero in Ocker (Text Ink, 7.4:1), Fakten in Grün (weißer Text nur ab 24 px, 3.7:1), Abschluss in Rot (weißer Text, 5.2:1). Dazwischen Papier.
+- **Logolinien als große Form** (`LogoFormen.jsx`) am Rand der Farbflächen, angeschnitten, rein dekorativ.
+- **Sticker** („Plätze frei“): Rot, leicht schräg (−4°), springt beim Laden einmal auf; mobil auf der Kante zum Bildband.
+- **Fotos mit versetztem Farbrahmen** (`.foto-rahmen`): Farbblock 14 px nach rechts unten verschoben, gleicher Radius.
+- Auf farbigen Flächen sind Links Ink bzw. Weiß, nie Rot auf Ocker.
 
 ## 7. Interaktion & Barrierefreiheit
 

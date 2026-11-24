@@ -325,3 +325,217 @@
     to { transform: none; opacity: 1; }
   }
 }
+
+/* ===== Kräftige Farbflächen (Startseite) ===== */
+
+/* Hero: Ocker-Fläche, Ink-Text (7.4:1) */
+.home-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--logo-ocker);
+  color: var(--ink);
+}
+
+.home-hero-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.home-hero .home-hero-sub,
+.home-hero .home-plaetze {
+  color: var(--ink);
+}
+
+.home-hero .home-plaetze {
+  font-weight: 700;
+}
+
+/* Links auf Ocker in Ink statt Rot (Rot auf Ocker wäre zu kontrastarm) */
+.home-hero .pfeil-link {
+  color: var(--ink);
+}
+
+.home-hero .btn-outline {
+  background: var(--paper);
+}
+
+.home-hero .btn-outline:hover {
+  background: var(--ink);
+}
+
+/* Termin-Karte auf der Ocker-Fläche: weiß, damit sie sich abhebt */
+.home-hero .termin {
+  background: #fff;
+  border-radius: var(--radius-gross);
+}
+
+/* Sticker „Plätze frei“ – leicht schräg, wie aufgeklebt */
+.sticker {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px 18px 8px;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  line-height: 1.1;
+  border-radius: 16px;
+  transform: rotate(-4deg);
+}
+
+.sticker-klein {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .sticker {
+    animation: sticker-auf 500ms cubic-bezier(0.2, 0.9, 0.25, 1.2) 200ms both;
+  }
+
+  @keyframes sticker-auf {
+    from { opacity: 0; transform: rotate(-12deg) scale(0.8); }
+    to { opacity: 1; transform: rotate(-4deg) scale(1); }
+  }
+}
+
+/* Logolinien als große Form am Rand der Fläche */
+.hero-formen {
+  position: absolute;
+  z-index: 0;
+  right: -40px;
+  bottom: -50px;
+  width: 280px;
+  opacity: 0.9;
+}
+
+.hero-formen path[stroke="var(--logo-ocker)"] {
+  stroke: #fff;
+}
+
+@media (max-width: 767px) {
+  .hero-formen {
+    width: 170px;
+    right: -50px;
+    bottom: -60px;
+    opacity: 0.6;
+  }
+}
+
+/* Fakten: grüne Fläche, großer weißer Satz (große Schrift ab 24 px, 3.7:1) */
+.home-fakten {
+  background: var(--logo-gruen);
+  border: 0;
+  padding: 56px 0;
+}
+
+.fakten-satz {
+  color: #fff;
+  font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+}
+
+.fakten-satz strong {
+  background: linear-gradient(transparent 64%, color-mix(in srgb, var(--logo-ocker) 80%, transparent) 64%);
+}
+
+/* Fotos mit farbigem, versetztem Rahmen */
+.foto-rahmen picture {
+  position: relative;
+  display: block;
+}
+
+.foto-rahmen picture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate(14px, 14px);
+  border-radius: var(--radius-gross);
+  background: var(--logo-gruen);
+}
+
+.foto-rahmen-rot picture::before {
+  background: var(--logo-rot);
+}
+
+.foto-rahmen img {
+  position: relative;
+  border-radius: var(--radius-gross);
+}
+
+.portrait-bild figcaption {
+  margin-top: 24px;
+}
+
+.einblicke-bilder img,
+.auszeichnung {
+  border-radius: var(--radius-gross);
+}
+
+.auszeichnung {
+  background: var(--gruen-tint);
+}
+
+/* Abschluss: rote Fläche, weißer Text (5.2:1) */
+.home-abschluss {
+  position: relative;
+  overflow: hidden;
+  background: var(--logo-rot);
+  color: #fff;
+}
+
+.home-abschluss h2,
+.home-abschluss a {
+  color: #fff;
+}
+
+.home-abschluss .schwung::after {
+  background: linear-gradient(90deg, var(--logo-ocker) 0 50%, #fff 50%);
+}
+
+.home-abschluss .termin {
+  color: var(--ink);
+  background: #fff;
+  border-radius: var(--radius-gross);
+}
+
+.home-abschluss .termin a.btn-primary {
+  color: #fff;
+}
+
+.abschluss-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.abschluss-formen {
+  position: absolute;
+  z-index: 0;
+  left: -60px;
+  top: -40px;
+  width: 260px;
+  opacity: 0.35;
+}
+
+.home-abschluss .termin h2 {
+  color: var(--ink);
+}
+
+/* Mobil: Sticker sitzt auf der Kante zum Bildband und braucht keinen eigenen Platz */
+@media (max-width: 767px) {
+  /* Nur seitlich abschneiden (Logolinien), nach oben darf der Sticker überstehen */
+  .home-hero { overflow-x: clip; overflow-y: visible; }
+  .home-hero-text { position: relative; }
+
+  .sticker {
+    position: absolute;
+    top: -52px;
+    right: 0;
+    z-index: 2;
+    margin: 0;
+    font-size: 1.1rem;
+    padding: 8px 14px 6px;
+  }
+}

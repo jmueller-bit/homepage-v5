@@ -7,6 +7,7 @@ import './Home.css';
 import AufnahmeWeg from '../components/AufnahmeWeg';
 import Foto from '../components/Foto';
 import LogoListe from '../components/LogoListe';
+import LogoFormen from '../components/LogoFormen';
 import { ALBEN, FAMILIENWORKSHOP, BAND } from '../data/bilder';
 import BildBand from '../components/BildBand';
 import PageMeta from '../components/PageMeta';
@@ -62,6 +63,9 @@ function Home() {
       <section className="home-hero">
         <div className="container home-hero-grid">
           <div className="home-hero-text">
+            <p className="sticker">
+              Plätze frei <span className="sticker-klein">in der Primaria I</span>
+            </p>
             <h1>
               Astrid Lindgren Schule
               <span className="home-hero-sub">Zentrum für ganzheitliches Lernen</span>
@@ -70,7 +74,7 @@ function Home() {
               Eine kleine Schule in Wien-Liesing, seit 2003 – von der 1. bis zur 9. Schulstufe,
               mit Öffentlichkeitsrecht: Die Zeugnisse sind staatlich gültig.
             </p>
-            <p className="home-plaetze">Anmeldungen jederzeit möglich – besonders in der Primaria I sind Plätze frei.</p>
+            <p className="home-plaetze">Anmeldungen sind jederzeit möglich.</p>
             <div className="home-hero-actions">
               <a href={KONTAKT.telHref} className="btn btn-outline">Anrufen: {KONTAKT.telefon}</a>
               <Link to="/eltern/anmeldung" className="pfeil-link">Anmeldung &amp; Kosten</Link>
@@ -78,6 +82,7 @@ function Home() {
           </div>
           <TerminKarte id="termin-oben" termine={termine} />
         </div>
+        <LogoFormen className="hero-formen" />
       </section>
 
       <section className="home-fakten" aria-label="Die Schule in Zahlen">
@@ -92,7 +97,7 @@ function Home() {
 
       <section className="section home-portrait">
         <div className="container portrait-grid">
-          <figure className="portrait-bild">
+          <figure className="portrait-bild foto-rahmen foto-rahmen-rot">
             <Foto bild={FAMILIENWORKSHOP} sizes="(min-width: 1024px) 560px, 100vw" />
             <figcaption>Familienworkshop im November 2023</figcaption>
           </figure>
@@ -160,6 +165,7 @@ function Home() {
       </section>
 
       <section className="section home-abschluss">
+        <LogoFormen className="abschluss-formen" />
         <div className="container abschluss-grid">
           <div>
             <h2 className="schwung">Lernen Sie uns kennen</h2>
