@@ -3,6 +3,7 @@ import PageMeta from './PageMeta';
 import { findSection } from '../data/navigation';
 import { KONTAKT } from '../data/kontakt';
 import BildBand from './BildBand';
+import LogoFormen from './LogoFormen';
 import { BAND } from '../data/bilder';
 import './PageLayout.css';
 
@@ -21,6 +22,7 @@ function PageLayout({ title, lead, description, metaTitle, aside = true, childre
           <h1>{title}</h1>
           {lead && <p className="page-lead">{lead}</p>}
         </div>
+        <LogoFormen className="kopf-formen" />
       </header>
 
       <div className={`container page-raster ${aside ? '' : 'page-raster-voll'}`}>

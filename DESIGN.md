@@ -82,6 +82,7 @@ Die Startseite darf lauter sein als die Unterseiten – freundlich und modern, o
 - **Abschnitte als volle Farbflächen**: Hero in Ocker (Text Ink, 7.4:1), Fakten in Grün (weißer Text nur ab 24 px, 3.7:1), Abschluss in Rot (weißer Text, 5.2:1). Dazwischen Papier.
 - **Logolinien als große Form** (`LogoFormen.jsx`) am Rand der Farbflächen, angeschnitten, rein dekorativ.
 - **Sticker** („Plätze frei“): Rot, leicht schräg (−4°), springt beim Laden einmal auf; mobil auf der Kante zum Bildband.
+- **Unterseiten**: Seitenkopf als volle Fläche in der Bereichsfarbe (Grün dunkel `--green-text` mit Weiß 5.7:1, Ocker mit Ink, Rot mit Weiß), Logolinien angeschnitten rechts unten.
 - **Fotos mit versetztem Farbrahmen** (`.foto-rahmen`): Farbblock 14 px nach rechts unten verschoben, gleicher Radius.
 - Auf farbigen Flächen sind Links Ink bzw. Weiß, nie Rot auf Ocker.
 
